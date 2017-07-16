@@ -1,0 +1,14 @@
+{if !empty($diyitem['data'])}
+    <div class="diy-coupon col-{$diyitem['params']['couponstyle']}" style="margin: {$diyitem['style']['margintop']}px 0; background: {$diyitem['style']['background']};">
+        {loop $diyitem['data'] $couponitem}
+            {if !empty($couponitem['couponid'])}
+                <a class="diy-coupon-item" href="{php echo mobileUrl('sale/coupon/detail', array('id'=>$couponitem['couponid']))}" data-nocache="true">
+                    <div class="inner" style="border: 1px solid {$couponitem['bordercolor']}; background: {$couponitem['background']}; color: {$couponitem['textcolor']}; margin: {$diyitem['style']['margintop']}px {$diyitem['style']['marginleft']}px">
+                        <div class="name">{$couponitem['price']}</div>
+                        <div class="desc">{$couponitem['desc']}</div>
+                    </div>
+                </a>
+            {/if}
+        {/loop}
+    </div>
+{/if}

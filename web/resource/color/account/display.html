@@ -1,0 +1,82 @@
+{template 'common/header-gw'}
+    <div class="row" style="padding-top: 25px;">
+            <div class="col-sm-4">
+                <a class="btn btn-block btn-primary push-10" href="{url 'account/post-step'}"><i class="fa fa-plus"></i> 添加公众号</a>
+            </div>
+            <div class="col-sm-8">
+                <form action="./index.php" method="get" role="form">
+                    <input type="hidden" name="c" value="account">
+                    <input type="hidden" name="a" value="display">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control {if empty($_GPC['keyword']) && !empty($_GPC['s_uniacid'])}hide{/if}" placeholder="请输入微信公众号名称" name="keyword" id="s_keyword" value="{$_GPC['keyword']}">
+                            <input type="text" class="form-control {if empty($_GPC['s_uniacid'])}hide{/if}" placeholder="请输入微信公众号ID" name="s_uniacid" id="s_uniacid" value="{$_GPC['s_uniacid']}">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li><a href="javascript:;" onclick="$('#s_uniacid').addClass('hide').val('');$('#s_keyword').removeClass('hide');">根据公众号名称搜索</a></li>
+                                    <li><a href="javascript:;" onclick="$('#s_uniacid').removeClass('hide');$('#s_keyword').addClass('hide').val('');">根据公众号ID搜索</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+
+
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th class="text-center"><i class="si si-user"></i></th>
+                <th class="text-center">主号名称</th>
+                <th class="text-center">公众号名称</th>
+                <th class="text-center">接入状态</th>
+                <th class="text-center">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        {loop $list $uni}
+            {php $subaccount = count($uni['details']);}
+            {loop $uni['details'] $account}
+            <tr>
+                <td class="text-center">
+                    <img {if file_exists(IA_ROOT . '/attachment/headimg_'.$account['acid'].'.jpg')} src="{$_W['attachurl_local']}headimg_{$account['acid']}.jpg?acid={$account['acid']}"{else}src="resource/images/gw-wx.gif"{/if} class="img-avatar img-avatar48" onerror="this.src='resource/images/gw-wx.gif'" />
+                </td>
+                <td class="text-center">{$uni['name']}</td>
+                <td class="text-center">{$account['name']}</td>
+                <td class="text-center">
+                    {if $account['isconnect'] == 1}<i class="si si-check text-success"></i>{else}<i class="si si-close text-danger"></i>{/if}
+                </td>
+                <td class="text-center">
+                {if $uni['role'] == 'founder'}
+                                    <a href="{php echo url('account/post-acid', array('uniacid' => $uni['uniacid']))}" data-toggle="tooltip" data-placement="bottom" title="添加子公众号">添加子公众号</a> 
+                                    <a href="{php echo url('account/permission', array('uniacid' => $uni['uniacid']))}" data-toggle="tooltip" data-placement="bottom" title="添加操作用户">｜添加操作用户</a>
+                                    <a href="{php echo url('account/post', array('uniacid' => $uni['uniacid']))}" data-toggle="tooltip" data-placement="bottom" title="编辑帐号信息">｜编辑</a>
+                                    <a href="{php echo url('account/delete', array('uniacid' => $uni['uniacid']))}" onclick="return confirm('删除主公众号其所属的子公众号及其它数据会全部删除，确认吗？');return false;" data-toggle="tooltip" data-placement="bottom" title="删除">｜删除</a>
+                                    <a href="{php echo url('account/switch', array('uniacid' => $uni['uniacid']))}" class="manage" target="_balnk" data-toggle="tooltip" data-placement="bottom" title="管理" >｜功能管理</a>
+                                {elseif $uni['role'] == 'manager'}
+                                    <a href="{php echo url('account/post-acid', array('uniacid' => $uni['uniacid']))}" data-toggle="tooltip" data-placement="bottom" title="添加子公众号">｜添加子公众号</a> 
+                                    <a href="{php echo url('account/post', array('uniacid' => $uni['uniacid']))}" data-toggle="tooltip" data-placement="bottom" title="编辑帐号信息">｜编辑</a>
+                                    <a href="{php echo url('account/delete', array('uniacid' => $uni['uniacid']))}" onclick="return confirm('删除主公众号其所属的子公众号及其它数据会全部删除，确认吗？');return false;" data-toggle="tooltip" data-placement="bottom" title="删除">｜删除</a>
+                                    <a href="{php echo url('account/switch', array('uniacid' => $uni['uniacid']))}" class="manage" target="_balnk" data-toggle="tooltip" data-placement="bottom" title="管理" >｜功能管理</a>
+                                {elseif $uni['role'] == 'operator'}
+                                    <a href="{php echo url('account/switch', array('uniacid' => $uni['uniacid']))}" class="manage" target="_balnk" data-toggle="tooltip" data-placement="bottom" title="管理">｜功能管理</i></a>
+                                {/if}
+                </td>
+            </tr>
+            {/loop}
+        {/loop}
+<tr style="background:#fff;"> 
+   <td colspan="5"><div class="listpage pull-right">{$pager}</div></td>
+</tr>                      
+        </tbody>
+    </table>
+</div>
+    
+
+
+{template 'common/footer-gw'}

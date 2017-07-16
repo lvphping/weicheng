@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest versionCode="0.6">
+    <identifie><![CDATA[style6]]></identifie>
+    <title><![CDATA[微站模板6]]></title>
+	<type><![CDATA[often]]></type>
+    <author><![CDATA[微信]]></author>
+    <url><![CDATA[http://weixin.v-888.com]]></url>
+	<sections><![CDATA[0]]></sections>
+	<sections><![CDATA[0]]></sections>
+	<settings>
+	</settings>
+</manifest>

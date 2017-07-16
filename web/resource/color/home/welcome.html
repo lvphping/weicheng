@@ -1,0 +1,68 @@
+{template 'common/header'}
+<style>
+	.welcome-container .shortcut a {
+  display: block;
+  float: left;
+  text-align: center;
+  margin-right: 1.2em;
+  padding: 8px 5px;
+  width: 7em;
+  height: 7em;
+  overflow: hidden;
+  color: #333;
+}
+.welcome-container .shortcut a {text-decoration: none;}
+.welcome-container .shortcut a i {
+  display: block;
+  font-size: 3em;
+  margin: .28em .2em;
+  color: #5c90d2;
+}
+.welcome-container .shortcut a img {
+  display: block;
+  height: 3em;
+  margin: .85em auto;
+}
+nav:not(.mm-menu) {
+  display: block;
+}
+</style>
+
+<div class="clearfix welcome-container" style="padding-bottom: 30px;">
+	{if $do != 'ext'}
+	<div class="page-header">
+		<h4><i class="fa fa-plane"></i> {$title} 快捷操作</h4>
+	</div>
+	<div class="shortcut clearfix">
+		<a href="{php echo url('platform/reply', array('m' => 'userapi'))}">
+			<i class="fa fa-sitemap"></i>
+			<span>自定义接口</span>
+		</a>
+		{loop $shortcuts $shortcut}
+			<a href="{$shortcut['link']}" title="{$shortcut['title']}">
+				<img src="{$shortcut['image']}" alt="{$shortcut['title']}" class="img-rounded" />
+				<span>{$shortcut['title']}</span>
+			</a>
+		{/loop}
+	</div>
+	{/if}
+	{if $do == 'platform'}
+	{template 'home/welcome-platform'}
+	{/if}
+	{if $do == 'site'}
+	{template 'home/welcome-site'}
+	{/if}
+	{if $do == 'mc'}
+	{template 'home/welcome-mc'}
+	{/if}
+	{if $do == 'setting'}
+	{template 'home/welcome-setting'}
+	{/if}
+	{if $do == 'ext'}
+	{template 'home/welcome-ext'}
+	{/if}
+	{if $do == 'solution'}
+	{template 'home/welcome-solution'}
+	{/if}
+</div>
+{template 'common/footer'}

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="no-focus">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+    <title>{php if(isset($title)) $_W['page']['title'] = $title}{if !empty($_W['page']['title'])}{$_W['page']['title']} - {/if}{if empty($_W['page']['copyright']['sitename'])}{if IMS_FAMILY != 'x'}微信 - 公众平台自助引擎 -  Powered by WE7.CC{/if}{else}{$_W['page']['copyright']['sitename']}{/if}</title>
+    <meta name="keywords" content="{if empty($_W['page']['copyright']['keywords'])}{if IMS_FAMILY != 'x'}微信,微信公众平台,we7.cc{/if}{else}{$_W['page']['copyright']['keywords']}{/if}" />
+    <meta name="description" content="{if empty($_W['page']['copyright']['description'])}{if IMS_FAMILY != 'x'}公众平台自助引擎（www.goupu.org），简称微信，微信是一款免费开源的微信公众平台管理系统，是国内最完善移动网站及移动互联网技术解决方案。{/if}{else}{$_W['page']['copyright']['description']}{/if}" />
+    <link rel="shortcut icon" href="{$_W['siteroot']}{$_W['config']['upload']['attachdir']}/{if !empty($_W['setting']['copyright']['icon'])}{$_W['setting']['copyright']['icon']}{else}images/global/wechat.jpg{/if}" />
+    <link href="themes/color/account/css/bootstrap.css" rel="stylesheet">
+ 
+    <link href="themes/color/account/css/style.css" rel="stylesheet">
+
+    <link href="themes/color/account/css/magnific-popup.css" rel="stylesheet"> 
+
+    <link href="themes/color/account/css/iconfont-style.css" rel="stylesheet">
+
+    <link href="themes/color/account/scripts/animations/animate.css" rel="stylesheet">
+      
+    <link href="themes/color/account/css/bootstrap-datepicker3.min.css" rel="stylesheet">
+
+        <script type="text/javascript">
+    if(navigator.appName == 'Microsoft Internet Explorer'){
+        if(navigator.userAgent.indexOf("MSIE 5.0")>0 || navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0) {
+            alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+        }
+    }
+    
+    window.sysinfo = {
+{if !empty($_W['uniacid'])}
+        'uniacid': '{$_W['uniacid']}',
+{/if}
+{if !empty($_W['acid'])}
+        'acid': '{$_W['acid']}',
+{/if}
+{if !empty($_W['openid'])}
+        'openid': '{$_W['openid']}',
+{/if}
+{if !empty($_W['uid'])}
+        'uid': '{$_W['uid']}',
+{/if}
+        'siteroot': '{$_W['siteroot']}',
+        'siteurl': '{$_W['siteurl']}',
+        'attachurl': '{$_W['attachurl']}',
+        'attachurl_local': '{$_W['attachurl_local']}',
+{if defined('MODULE_URL')}
+        'MODULE_URL': '{MODULE_URL}',
+{/if}
+        'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'}
+    };
+    </script>
+    <style>
+        .icon{
+            color:#337ab7
+        }
+    </style>
+</head>
+<body data-spy="scroll" data-target=".navMenuCollapse">
+
+                <div id="preloader">
+                    <div class="loading-data"></div>
+                </div>
+
+    <div id="wrap">
+        
+   <nav class="navbar dark-bg navbar-fixed-top navbar-slide navbar-transparent bg-color3" data-selector="nav">
+            <div class="container"> 
+                <a class="navbar-brand goto" href="#" data-selector="a.btn, a.download-btn, button.btn, a.goto"><img src="{if !empty($_W['setting']['copyright']['flogo'])}{php echo tomedia($_W['setting']['copyright']['flogo']);}{else}/web/resource/color/img/gw-logo.png{/if}" height="30" ></a>
+                <button class="round-toggle navbar-toggle menu-collapse-btn collapsed" data-toggle="collapse" data-target=".navMenuCollapse" data-selector="Footer"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                <div class="collapse navbar-collapse navMenuCollapse">
+                    <ul class="nav">
+                        
+                        
+                        <li data-selector="nav li"><a href="{url 'user/login'}" data-selector="nav a">登录</a></li>
+                        {if !empty($settings['register']['open'])}
+                        <li data-selector="nav li"><a href="{url 'user/register'}" data-selector="nav a">注册</a></li>
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+       <header id="intro-center" class="intro-block bg-color1 dark-bg fixed-bg double-padding text-center" style="background-image: url(themes/color/account/images/001.jpg); background-attachment: fixed; background-color: rgb(37, 40, 48); background-size: cover; background-repeat: no-repeat;" data-selector="header">
+        <div class="container">
+            <div class="slogan" data-selector="Footer">
+                    <i class="icon center-icon big-icon icon-chat" data-selector=".icon" id="ui-id-8" style="color: rgb(255, 255, 255); font-size: 64px; opacity: 1;"></i>
+                    <h1 data-selector="h1" style=""><b>微信微信</b><br>
+免费开源公众号管理系统<br>
+<br></h1>
+                </div>
+            <a class="goto" href="#benefits-grid-center-4col" data-selector="a.btn, a.download-btn, button.btn, a.goto"><i class="icon big-icon icon-arrow-down" data-selector=".icon" style=""></i></a>
+        </div>
+    </header>
+        <section id="benefits-grid-center-4col" class="dark-bg bg-color1" data-selector="section" style="padding-top: 100px; padding-bottom: 80px; border-bottom-width: 0px; border-bottom-color: rgb(255, 255, 255); background-image: none; background-attachment: scroll; background-color: rgb(255, 255, 255); background-size: auto; background-repeat: repeat;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceInDown">
+                                <i class="icon icon-tablet" data-selector=".icon" style="color: #3c7ac9; font-size: 64px; opacity: 1;" id="ui-id-5"></i>
+                                <h3 data-selector="Footer" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 25px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">微网站、微场景</h3>
+                                
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="2s" data-wow-delay="1s" class="wow bounceInDown">
+                                <i class="icon icon-bubble" data-selector=".icon" id="ui-id-6" style="color: #3c7ac9; font-size: 64px; opacity: 1;"></i>
+                                <h3 data-selector="Footer" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">微信营销解决方案</h3>
+                                
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="3s" data-wow-delay="1s" class="wow bounceInDown">
+                                <i class="icon icon-lifesaver" data-selector=".icon" id="ui-id-7" style="color: #3c7ac9; font-size: 64px; opacity: 1;"></i>
+                                <h3 data-selector="Footer" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 25px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">微信账号集中一站管理</h3>
+                                
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="4s" data-wow-delay="1s" class="wow bounceInDown">
+                                <i class="icon icon-gears" data-selector=".icon" id="ui-id-7" style="color: #3c7ac9; font-size: 64px; opacity: 1;"></i>
+                                <h3 data-selector="Footer" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 25px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">强大的商家运营管理平台</h3>
+                                
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!-- BENEFITS GRID IMAGES BLOCK-->
+        <section id="benefits-grid-images" data-selector="section" style="padding-top: 80px; padding-bottom: 80px; border-bottom-width: 1px; border-bottom-color: rgb(232, 232, 232); background-image: url(themes/color/account/images/bg13.jpg); background-attachment: scroll; background-color: rgb(37, 40, 48); background-size: auto; background-repeat: repeat;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceIn" src="themes/color/account/images/feature1.png">
+                                <img src="themes/color/account/images/feature1.png" width="120" alt="feature" class="screen" data-selector="img" style="width: 120px; height: 120px; border-radius: 0px; border: 1px none rgb(0, 192, 255);">
+                                <h3 data-selector="Footer" style="color: rgb(243, 243, 243); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);" src="themes/color/account/images/feature1.png">微现场</h3>
+                                
+                            </li>
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceIn" src="themes/color/account/images/feature1.png">
+                                <img src="themes/color/account/images/feature2.png" width="120" alt="feature" class="screen" data-selector="img">
+                                <h3 data-selector="Footer" style="color: rgb(238, 238, 238); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);" src="themes/color/account/images/feature1.png">旅游游</h3>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceIn" src="themes/color/account/images/feature1.png">
+                                <img src="themes/color/account/images/feature3.png" width="120" alt="feature" class="screen" data-selector="img">
+                                <h3 data-selector="Footer" style="color: rgb(238, 238, 238); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);" src="themes/color/account/images/feature1.png">微外卖</h3>
+                                
+                            </li>
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceIn" src="themes/color/account/images/feature1.png">
+                                <img src="themes/color/account/images/feature4.png" width="120" alt="feature" class="screen" data-selector="img">
+                                <h3 data-selector="Footer" style="color: rgb(238, 238, 238); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);" src="themes/color/account/images/feature1.png">微商城</h3>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4">
+                        <ul class="item-list-center">
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceIn" src="themes/color/account/images/feature1.png">
+                                <img src="themes/color/account/images/feature5.png" width="120" alt="feature" class="screen" data-selector="img">
+                                <h3 data-selector="Footer" style="color: rgb(238, 238, 238); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);" src="themes/color/account/images/feature1.png">微汽车</h3>
+                                
+                            </li>
+                            <li data-selector="Footer" data-wow-duration="1s" data-wow-delay="1s" class="wow bounceIn" src="themes/color/account/images/feature1.png">
+                                <img src="themes/color/account/images/feature6.png" width="120" alt="feature" class="screen" data-selector="img">
+                                <h3 data-selector="Footer" style="color: rgb(238, 238, 238); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);" src="themes/color/account/images/feature1.png">微房产</h3>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section><!-- COUNTER BLOCK -->
+        <section id="counter" class="facts-block bg-color2 dark-bg text-center" data-selector="section" src="themes/color/account/images/feature1.png" style="padding-top: 80px; padding-bottom: 80px; border-bottom-width: 0px; border-bottom-color: rgb(255, 255, 255); background-image: none; background-attachment: scroll; background-color: rgb(238, 238, 238); background-size: auto; background-repeat: repeat;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <i class="icon icon-profile-male" data-selector=".icon" src="themes/color/account/images/feature1.png" id="ui-id-10" style="color: rgb(0, 0, 0); font-size: 64px; opacity: 0.400000005960465;"></i>
+                        <h3 class="timer" data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(0, 0, 0); font-size: 60px; margin-bottom: 10px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">840</h3>
+                        <h4 data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">平台用户数</h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="icon icon-chat" data-selector=".icon" src="themes/color/account/images/feature1.png" id="ui-id-11" style="color: rgb(0, 0, 0); font-size: 64px; opacity: 0.400000005960465;"></i>
+                        <h3 class="timer" data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(0, 0, 0); font-size: 60px; margin-bottom: 10px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">1600</h3>
+                        <h4 data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">平台公众号</h4>
+                    </div>
+                    <div class="col-sm-4">
+                        <i class="icon icon-grid" data-selector=".icon" src="themes/color/account/images/feature1.png" id="ui-id-12" style="color: rgb(0, 0, 0); font-size: 64px; opacity: 0.400000005960465;"></i>
+                        <h3 class="timer" data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(0, 0, 0); font-size: 60px; margin-bottom: 10px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">100</h3>
+                        <h4 data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(68, 68, 68); font-size: 20px; margin-bottom: 0px; margin-top: 0px; background-color: rgba(0, 0, 0, 0);">功能模块数</h4>
+                    </div>
+                </div>
+            </div>
+        </section><!-- DOWNLOAD MARKER CIRCLE LEFT BLOCK -->
+        <section id="download-marker-circle-left" class="dark-bg bg-color1" data-selector="section" src="themes/color/account/images/feature1.png" style="padding-top: 80px; padding-bottom: 80px; border-bottom-width: 0px; border-bottom-color: rgb(255, 255, 255); background-image: url(themes/color/account/images/bg13.jpg); background-attachment: scroll; background-color: rgb(37, 40, 48); background-size: auto; background-repeat: no-repeat;">
+            <div class="container">
+                <div class="row">
+                    
+                  <div class="col-md-9">
+                        <h2 data-selector="Footer" src="themes/color/account/images/feature1.png" style="color: rgb(255, 255, 255); font-size: 36px; margin-bottom: 30px; margin-top: 50px; background-color: rgba(0, 0, 0, 0);">赶快加入吧！立刻体验不一样的营销！</h2>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="marker-circle"><a href="{url 'user/register'}" class="btn btn-lg btn-primary" data-selector="Footer" style="color: rgb(255, 255, 255); border-color: #3c7ac9; border-width: 1px; border-radius: 5px; font-size: 20px; background-color: #3c7ac9;" src="themes/color/account/images/feature1.png">马上加入</a></div>
+                    </div>
+                </div>
+            </div>
+        </section><!-- FOOTER CENTER -->
+        <footer id="footer-center" class="text-center bg-color3" data-selector="footer">
+            <div class="container"> 
+                <p class="editContent" data-selector="Footer">{if empty($_W['setting']['copyright']['footerleft'])}Powered by <a href="http://www.goupu.org"><b>微信</b></a> v{IMS_VERSION} &copy; 2014-2015 <a href="http://www.goupu.org">www.goupu.org</a>{else}{$_W['setting']['copyright']['footerleft']}{/if}</p>
+            </div>
+        </footer></div><!-- /#wrap -->
+    
+
+
+    <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">&nbsp;</h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="themes/color/account/scripts/jquery-1.11.2.min.js"></script> 
+    <script src="themes/color/account/scripts/bootstrap.min.js"></script> 
+    <script src="themes/color/account/scripts/jquery.validate.min.js"></script>
+    <script src="themes/color/account/scripts/smoothscroll.js"></script> 
+    <script src="themes/color/account/scripts/jquery.smooth-scroll.min.js"></script> 
+    <script src="themes/color/account/scripts/placeholders.jquery.min.js"></script> 
+    <script src="themes/color/account/scripts/jquery.magnific-popup.min.js"></script>
+    <script src="themes/color/account/scripts/jquery.counterup.min.js"></script>
+    <script src="themes/color/account/scripts/waypoints.min.js"></script>
+    <script src="themes/color/account/scripts/animations/wow.min.js"></script>
+    <script src="themes/color/account/scripts/jquery.jCounter-0.1.4.js"></script>
+    <script src="themes/color/account/scripts/bootstrap-datepicker.min.js"></script>
+    <script src="themes/color/account/scripts/custom.js"></script>
+
+    
+
+
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{php if(isset($title)) $_W['page']['title'] = $title}{if !empty($_W['page']['title'])}{$_W['page']['title']} - {/if}{if empty($_W['page']['copyright']['sitename'])}{if IMS_FAMILY != 'x'}微信 - 公众平台自助引擎 -  Powered by 012WZ.COM{/if}{else}{$_W['page']['copyright']['sitename']}{/if}</title>
+	<meta name="keywords" content="{if empty($_W['page']['copyright']['keywords'])}{if IMS_FAMILY != 'x'}微信,微信,微信公众平台,012wz.com{/if}{else}{$_W['page']['copyright']['keywords']}{/if}" />
+	<meta name="description" content="{if empty($_W['page']['copyright']['description'])}{if IMS_FAMILY != 'x'}公众平台自助引擎（www.012wz.com），简称微信，微信是一款免费开源的微信公众平台管理系统，是国内最完善移动网站及移动互联网技术解决方案。{/if}{else}{$_W['page']['copyright']['description']}{/if}" />
+	<link rel="shortcut icon" href="{$_W['siteroot']}{$_W['config']['upload']['attachdir']}/{if !empty($_W['setting']['copyright']['icon'])}{$_W['setting']['copyright']['icon']}{else}images/global/wechat.jpg{/if}" />
+	<!--模板-->
+	<link rel="stylesheet" type="text/css" href="./resource/hcwechat/processor_bar218878.css"><!--注册时候的css-->
+	<link onerror="wx_loaderror(this)" rel="stylesheet" href="./resource/hcwechat/page_login218878.css"><!--登陆时候的css-->
+	<link onerror="wx_loaderror(this)" rel="stylesheet" href="./resource/hcwechat/index.css">
+	<!--模板-->
+	
+	<!---默认-->
+	<script>var require = { urlArgs: 'v={php echo date('YmdH');}' };</script>
+	<script src="./resource/js/require.js"></script>
+	<script src="./resource/js/app/config.js"></script>
+	<script src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="./resource/js/html5shiv.min.js"></script>
+		<script src="./resource/js/respond.min.js"></script>
+	<![endif]-->
+	
+	<style>
+	.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus{
+	background-color:#44b549;
+	}
+	.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus,.nav.nav-tabs{
+	border-color:#44b549;
+	
+	}
+	a{color:#595959;
+	}
+
+	.label-info{
+	background-color:#FBC15E;
+	}
+	.btn-primary{
+		background-color:#44b549;
+		border-color:#44b549;
+	}
+	.nav-pills>li.active>a, .nav-pills>li.active>a:hover, .nav-pills>li.active>a:focus{
+		background-color:#44b549;
+		border-color:#44b549;
+	}
+	<!--.panel-info>.panel-heading{
+		border-color:#FBC15E;
+		color:#fff;
+		background-color:#FBC15E;
+	}-->
+	
+	.alert-danger,.alert-info,.panel-info>.panel-heading{
+		border-color:#faebcc;
+		color:#8a6d3b;
+		background-color:#fcf8e3;
+	}
+	.panel-info{
+		border-color:#faebcc;
+	}
+	.text-danger{
+		color:#FBC15E;
+	}
+	.nav-tabs>li>a:hover{
+		border-color:#eee #eee #44b549 #eee;
+		color:#2d2d2d;
+	}
+	.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary{
+		background-color:#44b549;
+		border-color:#44b549;
+	}
+
+	</style>
+	<script type="text/javascript">
+			if(navigator.appName == 'Microsoft Internet Explorer'){
+				if(navigator.userAgent.indexOf("MSIE 5.0")>0 || navigator.userAgent.indexOf("MSIE 6.0")>0 || navigator.userAgent.indexOf("MSIE 7.0")>0) {
+					alert('您使用的 IE 浏览器版本过低, 推荐使用 Chrome 浏览器或 IE8 及以上版本浏览器.');
+				}
+				}
+			
+					window.sysinfo = {
+				{if !empty($_W['uniacid'])}
+						'uniacid': '{$_W['uniacid']}',
+				{/if}
+				{if !empty($_W['acid'])}
+						'acid': '{$_W['acid']}',
+				{/if}
+				{if !empty($_W['openid'])}
+						'openid': '{$_W['openid']}',
+				{/if}
+				{if !empty($_W['uid'])}
+						'uid': '{$_W['uid']}',
+				{/if}
+						'siteroot': '{$_W['siteroot']}',
+						'siteurl': '{$_W['siteurl']}',
+						'attachurl': '{$_W['attachurl']}',
+				{if defined('MODULE_URL')}
+						'MODULE_URL': '{MODULE_URL}',
+				{/if}
+						'cookie' : {'pre': '{$_W['config']['cookie']['pre']}'}
+				};
+	</script>
+	<!---默认-->
+</head>
+<body class="zh_CN">

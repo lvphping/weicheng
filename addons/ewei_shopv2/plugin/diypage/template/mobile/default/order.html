@@ -1,0 +1,46 @@
+<style> 
+.orderlist{background: #ff9900;border-radius: 18px;color: #fff;opacity:0.9;height: 36px;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -khtml-opacity: 0;
+    overflow: hidden;}
+    
+.share_headimgurl{
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    float: left;
+}
+</style>   
+<div class="diy-layer external orderlist"  style="width: auto; position: fixed; display: block; overflow: hidden; z-index: 999; top: 15px; left: 8%; text-align: left; text-align: left; text-align: left;"">
+<img id="headpic" class="share_headimgurl" src="{$order['avatar']}" width="25">
+    <span id="shuoming" style="margin-left:3%;line-height:36px;font-size:14px;">最新订单来自{$order['info1']}的{$order['nickname']}</span>
+    <span id="sec"  style="font-size:14px;margin-right:12px;display: inline;padding-right: 3%;">{$order['info2']}秒前</span>
+</div>
+<script>
+function funcTest(){
+	setTimeout("hide();",5000);
+}
+function show(){
+    $.post("{php echo mobileUrl('member/tip')}",function(data){
+    	if(data.status==0)
+    	{
+    		$(".orderlist").show();
+            $("#shuoming").html("最新订单来自"+data.result.info1+"的"+data.result.nickname);
+            $("#sec").html(data.result.info2+"秒前"+"  ");
+            $("#headpic").attr("src",data.result.avatar);
+    	}
+		
+    },'JSON');
+    setTimeout("hide();",5000);
+}
+function hide()
+{
+	$('.orderlist').hide();
+	setTimeout("show();",2000);
+}
+$(function(){
+	funcTest();
+});
+</script><!--微橙商城系统-->

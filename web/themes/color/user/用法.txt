@@ -1,0 +1,1 @@
+将里面文件和文件放入web/themes/color/user里

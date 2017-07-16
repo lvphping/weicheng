@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest versionCode="0.5,0.51">
+    <identifie><![CDATA[default]]></identifie>
+    <title><![CDATA[默认模板]]></title>
+    <description><![CDATA[微站模板]]></description>
+    <author><![CDATA[微信]]></author>
+    <url><![CDATA[http://www.v-888.com]]></url>
+	<type><![CDATA[often]]></type>
+</manifest>

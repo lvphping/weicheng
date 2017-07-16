@@ -1,0 +1,46 @@
+   <script>require(['bootstrap']);</script>
+
+ </main>
+   <!-- Footer -->
+            
+            <!-- END Footer -->
+        </div>
+
+<script>
+        
+        // When a submenu link is clicked
+        jQuery('[data-toggle="nav-submenu"]').on('click', function(e){
+            // Get link
+            var $link = jQuery(this);
+
+            // Get link's parent
+            var $parentLi = $link.parent('li');
+
+            if ($parentLi.hasClass('open')) { // If submenu is open, close it..
+                $parentLi.removeClass('open');
+            } else { // .. else if submenu is closed, close all other (same level) submenus first before open it
+                $link
+                    .closest('ul')
+                    .find('> li')
+                    .removeClass('open');
+
+                $parentLi
+                    .addClass('open');
+            }
+
+            // Remove focus from submenu link
+            if ($lHtml.hasClass('no-focus')) {
+                $link.blur();
+            }
+
+            return false;
+        });
+
+
+</script>  
+
+
+<script src="./resource/color/js/st.js"></script>
+<script src="./resource/color/js/commonp.js"></script>
+    </body>
+</html>

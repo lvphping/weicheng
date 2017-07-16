@@ -1,0 +1,196 @@
+{template 'common/header-base'}
+
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed side-overlay-o gw-container" style="padding-left:0px">
+
+	{if !empty($_W['uid'])}
+		{if !empty($_W['uniacid'])}
+			 
+
+    <header id="header-navbar" class="content-mini content-mini-full" style="left:0px">
+        <!-- Header Navigation Right -->
+        <ul class="nav-header pull-right">
+        <li class="dropdown topbar-notice">
+                    <a type="button"  data-toggle="dropdown" style="padding-left:15px">
+                        <span class="badge badge-primary" ><i class="fa fa-bell"></i> <span id="notice-total">0</span> </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dLabel">
+                        <div class="topbar-notice-panel">
+                            <div class="topbar-notice-arrow"></div>
+                            <div class="topbar-notice-head">
+                                系统公告
+                            </div>
+                            <div class="topbar-notice-body">
+                                <ul id="notice-container"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+        <li id="liebiao">
+               <div class="btn-group">
+                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button" >
+                    <i class="fa fa-th-list"></i>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    {php global $top_nav;}
+                    {loop $top_nav $nav}
+                        {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array($nav['name'], $_W['setting']['permurls']['sections'])}<li{if FRAME == $nav['name']} class="active"{/if}><a href="{php echo url('home/welcome/' . $nav['name']);}"><i class="{$nav['append_title']} pull-right"></i> {$nav['title']}</a></li>{/if}
+                    {/loop}  
+                    
+                </ul>
+                </div>
+            </li>         
+            <li>
+                <div class="btn-group">
+                    <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
+                        <img {if file_exists(IA_ROOT . '/attachment/headimg_'.$account['acid'].'.jpg')} src="{$_W['attachurl_local']}headimg_{$account['acid']}.jpg?acid={$account['acid']}"{else}src="resource/images/gw-wx.gif"{/if} onerror="this.src='resource/images/gw-wx.gif'" />
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-header">{$_W['user']['username']} ({if $_W['role'] == 'founder'}系统管理员{elseif $_W['role'] == 'manager'}公众号管理员{else}公众号操作员{/if})</li>
+                        <li>
+                            <a tabindex="-1" href="base_pages_inbox.html">
+                                <i class="fontello-icon-comment-alt-1 pull-right"></i>
+                                {$_W['account']['name']}
+                            </a>
+                        </li>
+
+                        {if $_W['role'] != 'operator'}
+                        <li>
+                            <a tabindex="-1" href="{url 'account/post' array('uniacid' => $_W['uniacid'])}" target="_blank">
+                                <i class="fontello-icon-edit pull-right"></i>编辑当前账号资料
+                            </a>
+                        </li>
+                        {/if}
+                        <li>
+                            <a tabindex="-1" href="{url 'account/display'}" target="_blank">
+                                <i class="fontello-icon-chat-1 pull-right"></i>管理其它公众号
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="-1" href="{url 'utility/emulator'}" target="_blank">
+                                <i class="fontello-icon-edit-2 pull-right"></i>模拟测试
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+
+                        <li><a href="{url 'user/profile/profile'}" target="_blank"><i class="fontello-icon-vcard pull-right"></i> 我的账号</a></li>
+                {if $_W['role'] == 'founder'}
+                <li><a href="{url 'system/welcome'}" target="_blank"><i class="fontello-icon-cog-alt pull-right"></i> 系统选项</a></li>
+                <li><a href="{url 'system/welcome'}" target="_blank"><i class="fontello-icon-spin3 pull-right"></i> 自动更新</a></li>
+                <li><a href="{url 'system/updatecache'}" target="_blank"><i class="fontello-icon-loop-alt pull-right"></i> 更新缓存</a></li>
+                <li class="divider"></li>
+                {/if}
+                <li><a href="{url 'user/logout'}"><i class="fontello-icon-logout-1 pull-right"></i> 退出系统</a></li>
+                    </ul>
+                </div>
+            </li>
+            
+        </ul>
+        <!-- END Header Navigation Right -->
+
+        <!-- Header Navigation Left -->
+        <ul class="nav-header pull-left">
+        	<li>
+	            <a class="h5" href="###">
+	                <span class="h4 font-w600 sidebar-mini-hide">微信微信</span>
+	            </a>
+        	</li> 
+            {php global $top_nav;}
+			{loop $top_nav $nav}
+				{if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array($nav['name'], $_W['setting']['permurls']['sections'])}<li{if FRAME == $nav['name']} class="active"{/if}  id="liebiaoyuan"><a href="{php echo url('home/welcome/' . $nav['name']);}"><i class="{$nav['append_title']}"></i> {$nav['title']}</a></li>{/if}
+			{/loop}                                                       
+        </ul>
+        <!-- END Header Navigation Left -->
+    </header>
+		{else}
+	<header id="header-navbar" class="content-mini content-mini-full" style="left:0px">
+    <!-- Header Navigation Right -->
+    <ul class="nav-header pull-right"> 
+    	<li>
+    	<div class="btn-group">
+            <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
+                <img {if file_exists(IA_ROOT . '/attachment/headimg_'.$account['acid'].'.jpg')} src="{$_W['attachurl_local']}headimg_{$account['acid']}.jpg?acid={$account['acid']}"{else}src="resource/images/gw-wx.gif"{/if} onerror="this.src='resource/images/gw-wx.gif'" />
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                
+                <li>
+                    <a tabindex="-1" href="{url 'account/display'}" target="_blank">
+                        <i class="fontello-icon-chat-1 pull-right"></i>公众号管理
+                    </a>
+                </li>
+                <li>
+	                <a href="{url 'system/welcome'}">
+						<i class="fontello-icon-cog-alt pull-right"></i>系统管理
+					</a>
+				</li>
+        		<li><a href="{url 'user/logout'}"><i class="fontello-icon-logout-1 pull-right"></i> 退出系统</a>
+        		</li>
+            </ul>
+         </div>
+        </li>          
+    </ul>
+    <!-- END Header Navigation Right -->
+
+    <!-- Header Navigation Left -->
+    <ul class="nav-header pull-left">
+        <li>
+            <a class="h5" href="###">
+                <span class="h4 font-w600 sidebar-mini-hide">微信微信</span>
+            </a>
+        </li>                                                 
+    </ul>
+    <!-- END Header Navigation Left -->
+ </header> 
+		{/if}
+	{else}
+		<div class="navbar navbar-inverse navbar-static-top" role="navigation" style="z-index:1001;">
+			<div class="container-fluid container">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="{php echo url('user/register');}"><i class="fa fa-user"></i>注册</a></li>
+					<li><a href="{php echo url('user/login');}"><i class="fa fa-user-plus"></i>登陆</a></li>
+				</ul>
+			</div>
+		</div>
+	{/if}
+
+<main id="main-container">
+
+    <div class="content content-boxed">
+
+        <div class="block" style="box-shadow: 0 1px 3px rgba(195, 194, 194, 0.51)">
+            <div class="block-content block-content-narrow"> 
+		{if defined('IN_MESSAGE')}
+			<div class="jumbotron clearfix alert alert-{$label}">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+						<i class="fa fa-5x fa-{if $label=='success'}check-circle{/if}{if $label=='danger'}times-circle{/if}{if $label=='info'}info-circle{/if}{if $label=='warning'}exclamation-triangle{/if}"></i>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+						{if is_array($msg)}
+							<h2>MYSQL 错误：</h2>
+							<p>{php echo cutstr($msg['sql'], 300, 1);}</p>
+							<p><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</p>
+						{else}
+						<h2>{$caption}</h2>
+						<p>{$msg}</p>
+						{/if}
+						{if $redirect}
+						<p><a href="{$redirect}" class="alert-link">如果你的浏览器没有自动跳转，请点击此链接</a></p>
+						<script type="text/javascript">
+							setTimeout(function () {
+								location.href = "{$redirect}";
+							}, 3000);
+						</script>
+						{else}
+							<p>[<a href="javascript:history.go(-1);" class="alert-link">点击这里返回上一页</a>] &nbsp; [<a href="./?refresh" class="alert-link">首页</a>]</p>
+						{/if}
+					</div>
+				</div>
+			</div>
+		{/if}
+        <div style="margin-bottom: 50px;">
+<script>
+    var h = document.documentElement.clientHeight;
+    $("#main-container").css('min-height',h-60);
+</script>

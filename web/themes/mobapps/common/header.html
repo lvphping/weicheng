@@ -1,0 +1,242 @@
+{template 'common/header-base'}
+<section id="container" class="">    
+    <!--header start-->
+      <header class="header white-bg">
+            <div class="sidebar-toggle-box">
+             <!--   <div class="fa fa-reorder icon-reorder"></div>-->
+            </div>
+
+            
+            <!--logo start-->
+            <a href="{url 'accound/display'}" class="logo"><span>人人店</span></a>
+            <!--logo end-->            
+            <div class="top-nav ">
+                <!--user info start-->
+                <ul class="nav pull-right top-menu">
+                   
+                    <!-- user login dropdown start-->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            {if $_W['role'] != 'operator'}
+                            <img class="avatar" width="29" height="29" src="{php echo tomedia('headimg_'.$_W['account']['acid'].'.jpg')}?time={php echo time()}" onerror="this.src='resource/images/gw-wx.gif'" alt="{$_W['account']['name']}">
+                                {/if}  
+                            <span class="username">{$_W['user']['username']} ({if $_W['role'] == 'founder'}系统管理员{elseif $_W['role'] == 'manager'}公众号管理员{else}公众号操作员{/if})</span>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu extended logout">
+                            <div class="log-arrow-up"></div>
+                            <li><a href="{url 'user/profile/profile'}"><i class="fa fa-suitcase"></i>我的账号</a></li>
+                            {if $_W['role'] == 'founder'}
+                            <li><a href="{url 'system/welcome'}"><i class="fa fa-cog"></i> 系统选项</a></li>
+                            <li><a href="{url 'system/updatecache'}"><i class="fa fa-refresh"></i> 更新缓存</a></li>
+                            {/if}
+                            <li><a href="{url 'user/logout'}"><i class="fa fa-key"></i> 退出系统</a></li>
+                        </ul>
+                    </li>
+                    <!-- user login dropdown end -->
+                </ul>
+                <!--user info end-->
+            </div> 
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    <!-- settings start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <i class="fa fa-user"></i>                            
+                        </a>
+                        <ul class="dropdown-menu extended tasks-bar">
+                            <div class="notify-arrow notify-arrow-green"></div>
+                            <li>
+                                <p class="green">公众号名称：{$_W['account']['name']} </p>
+                            </li>
+                            {if $_W['role'] != 'operator'}
+						<li><a href="{url 'account/post' array('uniacid' => $_W['uniacid'])}" target="_blank"><i class="fa fa-weixin fa-fw"></i> 编辑当前账号资料</a></li>
+						{/if}
+						<li><a href="{url 'account/display'}" target="_blank"><i class="fa fa-cogs fa-fw"></i> 管理其它公众号</a></li>                            
+                        </ul>
+                    </li>
+                    <!-- settings end -->
+                    <!-- notification dropdown start-->
+                    <li id="header_notification_bar" class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+
+                            <i class="fa fa-bell"></i>
+                            <span class="badge bg-warning" id="notice-total">0</span>
+                        </a>
+                        <ul class="dropdown-menu extended notification">
+                            <div class="notify-arrow notify-arrow-yellow"></div>
+                            <li>
+                                <p class="yellow">系统公告</p>
+                            </li>
+                            <li>
+                               <ul id="notice-container">
+                            
+                               </ul>
+                            </li>
+                            
+                            <li>
+                                <a href="{php echo url('article/notice-show/list');}" class="pull-right">更多公告>></a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <!-- notification dropdown end -->
+                </ul>
+                <!--  notification end -->
+            </div>           
+        </header>
+      <!--header end-->
+    
+    <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+             <!-- sidebar menu start-->              
+              <ul class="sidebar-menu">
+			  
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('platform', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'platform'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/platform'}"><i class="fa fa-cog"></i>基础设置</a></li>{/if}
+ <!--<li><a href="{php echo $_W['siteroot'].'web/index.php?c=home&a=welcome&do=ext&m=ewei_shop'}"><i class="fa fa-umbrella"></i> 人人店管理</a></li>-->
+        <!--     <li><a href="{php echo $_W['siteroot'].'web/index.php?c=site&a=entry&method=cover&p=commission&do=plugin&m=ewei_shop'}"><i class="fa fa-umbrella"></i>分销</a></li>  --> 
+ 
+  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('platform', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'platformss'} class="active"{/if} id="liebiaoyuanss"><a href="{php echo $_W['siteroot'].'web/index.php?c=site&a=entry&m=ewei_shopv2&do=web&r=shop'}" target="_blank"><i class="fa fa-users"></i>人人店</a></li>{/if}
+
+ 
+
+ 
+ {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('setting', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'setting'} class="active"{/if}><a href="{url 'home/welcome/setting'}" id="liebiaoyuan"><i class="fa fa-umbrella"></i>支付设置</a></li>{/if}
+
+                {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('ext', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'ext'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/ext'}"><i class="fa fa-cubes"></i>营销模块</a></li>{/if}
+ 
+	<!--		   {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('ext', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'ext'} class="active"{/if} id="liebiaoyuan"><a href="$_W['siteroot']./web/index.php?c=home&a=welcome&do=ext&m=ewei_shop"><i class="fa fa-cubes"></i>分销管理</a></li>{/if}-->
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('mc', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'mc'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/mc'}"><i class="fa fa-gift"></i>粉丝营销</a></li>{/if}
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('site', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'site'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/site'}"><i class="fa fa-life-bouy"></i>微站功能</a></li>{/if}
+                
+			
+			  
+			  
+			  
+				
+			<!--	{php global $top_nav;}
+				{loop $top_nav $nav}
+					{if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array($nav['name'], $_W['setting']['permurls']['sections'])}<li{if FRAME == $nav['name']} class="active"{/if}><a href="{php echo url('home/welcome/' . $nav['name']);}"><i class="{$nav['append_title']}"></i>{$nav['title']}</a></li>{/if}
+				{/loop}
+				<li {if $action == 'emulator'}class="active"{/if}>
+				</li>	-->			
+			</ul>
+              <!-- sidebar menu end-->             
+              
+               </div>
+      </aside>
+      <!--sidebar end-->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--state overview start-->
+    
+    
+	<div>
+		{if defined('IN_MESSAGE')}
+		<div class="jumbotron clearfix alert alert-{$label}">
+			<div class="row">
+				<div class="col-xs-12 col-sm-3 col-lg-2">
+					<i class="fa fa-5x fa-{if $label=='success'}check-circle{/if}{if $label=='danger'}times-circle{/if}{if $label=='info'}info-circle{/if}{if $label=='warning'}exclamation-triangle{/if}"></i>
+				</div>
+				<div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+					{if is_array($msg)}
+						<h2>MYSQL 错误：</h2>
+						<p>{php echo cutstr($msg['sql'], 300, 1);}</p>
+						<p><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</p>
+					{else}
+					<h2>{$caption}</h2>
+					<p>{$msg}</p>
+					{/if}
+					{if $redirect}
+					<p><a href="{$redirect}">如果你的浏览器没有自动跳转，请点击此链接</a></p>
+					<script type="text/javascript">
+						setTimeout(function () {
+							location.href = "{$redirect}";
+						}, 3000);
+					</script>
+					{else}
+						<p>[<a href="javascript:history.go(-1);">点击这里返回上一页</a>] &nbsp; [<a href="./?refresh">首页</a>]</p>
+					{/if}
+				</div>
+		{else}
+		<div class="row">
+			{php $frames = empty($frames) ? $GLOBALS['frames'] : $frames; _calc_current_frames($frames);}
+			{if !empty($frames)}
+				<div class="col-xs-12 col-sm-3 col-lg-2 big-menu"  id="submemu">			
+					
+					{loop $frames $k $frame}
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title">{if empty($frame['title'])}暂无分类{else}{$frame['title']} {/if}</h4>
+							<a class="panel-collapse collapsed" data-toggle="collapse" href="#frame-{$k}">
+								<i class="fa fa-chevron-circle-down"></i>
+							</a>
+						</div>
+						<ul class="list-group collapse in" id="frame-{$k}">
+							{loop $frame['items'] $link}
+							{if !empty($link['append'])}
+							<li class="list-group-item{$link['active']}" onclick="window.location.href = '{$link['url']}';" style="cursor:pointer; overflow:hidden;" kw="{$link['title']}">
+								<a class="pull-right" href="{$link['append']['url']}">{$link['append']['title']}</a>
+								{$link['title']}
+							</li>
+							{else}
+							<a class="list-group-item{$link['active']}" href="{$link['url']}" kw="{$link['title']}">{$link['title']}</a>
+							{/if}
+							{/loop}
+						</ul>
+					</div>
+					{/loop}
+					<script type="text/javascript">
+						require(['bootstrap'], function(){
+							$('.ext-type').click(function(){
+								var id = $(this).data('id');
+								util.cookie.del('ext_type');
+								util.cookie.set('ext_type', id, 8640000);
+								location.reload();
+								return false;
+							});
+
+							$('#search-menu input').keyup(function() {
+								var a = $(this).val();
+								$('.big-menu .list-group-item, .big-menu .panel-heading').hide();
+								$('.big-menu .list-group-item').each(function() {
+									$(this).css('border-left', '0');
+									if(a.length > 0 && $(this).attr('kw').indexOf(a) >= 0) {
+										$(this).parents(".panel").find('.panel-heading').show();
+										$(this).show().css('border-left', '3px #428bca double');
+									}
+								});
+								if(a.length == 0) {
+									$('.big-menu .list-group-item, .big-menu .panel-heading').show();
+								}
+							});
+						});
+					</script>
+				</div>
+				<div class="col-xs-12 col-sm-9 col-lg-10 subcontentwarp">
+					{if CRUMBS_NAV == 1}
+						{php global $module_types;global $module;global $ptr_title;}
+						<ol class="breadcrumb" style="padding:5px 0;">
+							<li><a href="{url 'home/welcome/ext'}"><i class="fa fa-cogs"></i> &nbsp; 扩展功能</a></li>
+							<li><a href="{url 'home/welcome/ext' array('m' => $module['name'])}">{$module_types[$module['type']]['title']}模块 - {$module['title']}</a></li>
+							<li class="active">{$ptr_title}</li>
+						</ol>
+					{elseif CRUMBS_NAV == 2}
+						{php global $module_types;global $module;global $ptr_title; global $site_urls; $m = $_GPC['m'];}
+						<ul class="nav nav-tabs">
+							<li><a href="{url 'platform/reply' array('m' => $m)}">管理{$module['title']}</a></li>
+							<li><a href="{url 'platform/reply/post' array('m' => $m)}"><i class="fa fa-plus"></i> 添加{$module['title']}</a></li>
+							{if !empty($site_urls)}
+								{loop $site_urls $site_url}
+									<li {if $_GPC['do'] == $site_url['do']} class="active"{/if}><a href="{$site_url['url']}"> {$site_url['title']}</a></li>
+								{/loop}
+							{/if}
+						</ul>
+					{/if}
+			{else}
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+			{/if}
+		{/if}

@@ -1,0 +1,112 @@
+{template 'common/header-login'}
+<link rel="stylesheet" type="text/css" href="./resource/mpqq/help.css">
+<div class="help">
+    <div class="heading">
+        <div class="head-top">
+            <img class="logo" src="./resource/mpqq/images/logo_beta.png">
+            <div class="link">
+                 <a href="/">首页</a>
+                <a href="{url 'user/login'}" target="_blank">登陆</a>
+                <a href="{url 'user/register'}" target="_blank">注册</a>
+            </div>
+           </div>    
+      
+    </div>   
+    
+    <div class="content">
+    <div class="container_bd">
+    <div class="container_box">        
+    <div class="announcement_box">
+    {if $do == 'list'}
+        <ol class="breadcrumb">
+            <li><a href="./index.php"><i class="fa fa-home"></i>系统首页</a></li>
+            <li><a href="{php echo url('article/notice-show/list');}">公告列表</a></li>
+            <li class="active">{if !$cateid}所有公告{else}{$categroys[$cateid]['title']}{/if}</li>
+        </ol>
+    
+      <div class="notice_set clearfix" style="visibility: visible;">
+  
+ {loop $categroys $categroy}
+   <div class="notice_head notice_item" id="notice_avatar" data-acc-type="5">
+            <div class="notice_item_inner ui_loading">
+
+                <a href="{php echo url('article/notice-show/list', array('cateid' => $categroy['id']));}" class="notice_head_a {if $cateid == $categroy['id']}active{/if} ">{$categroy['title']}</a></div>
+
+            </div>
+ {/loop}      
+
+
+        </div>
+ <div class="table_x" style="visibility: visible;">
+        <h2 class="notice_display_head">公告列表</h2>
+         <div class="table_size ui_loading_animation" style="height: 550px; transition: height 300ms; overflow: hidden;">
+                                <table class="ui_table notice_tb" id="notice_tb">
+                                    <tbody class="notice_tb_bd">
+                             {loop $data $da}
+                            <tr class="notice_tr">
+                                <td class="notice_content">
+                                <a href="{php echo url('article/notice-show/detail', array('id' => $da['id']));}" class="notice_content_a ell">{$da['title']}...</a>
+                                </td>
+                                <td class="notice_data">{php echo date('Y-m-d', $da['createtime']);}</td>
+                            </tr>
+                            {/loop}
+   </tbody>
+                                </table>
+
+
+
+        </div>
+
+
+        <div class="panel-body">
+            <ul>
+                {loop $data $da}
+                <li style="
+    text-indent: 1em;
+    line-height: 2.5em;
+">
+                    <a href="{php echo url('article/news-show/detail', array('id' => $da['id']));}">{$da['title']}...</a><span class="date">{php echo date('Y-m-d', $da['createtime']);}</span></li>
+                {/loop}
+            </ul>
+        </div>
+    </div>
+
+    {/if}
+    {if $do == 'detail'}
+        <ol class="breadcrumb">
+            <li><a href="./index.php"><i class="fa fa-home"></i>系统首页</a></li>
+            <li class="active"><a href="{php echo url('article/notice-show/list');}">公告列表</a></li>
+        </ol>
+        <div class="inner">
+        
+                        <h3 class="announcement_title">{$notice['title']}</h3>
+                
+                <div class="small text-center text-muted">
+                    <span>{php echo date('Y-m-d H:i', $notice['createtime']);}</span>
+                    <span>阅读：{$notice['click']}次</span>
+                </div>
+        </div>
+            <div id="content" style="
+    padding: 60px 70px;
+">
+                {$notice['content']}
+
+            </div>
+             {/if}
+        </div>
+   
+</div>
+</div>
+       
+   
+</div>
+
+<!-- end of container -->
+
+ <div class="footer" id="footer">
+        <p>Copyright © 1998-2016 Tencent. All Rights Reserved. </p>
+        <p>腾讯公司 版权所有</p>
+    </div>
+</div>
+
+</body><style type="text/css" id="16968150000"></style></html>

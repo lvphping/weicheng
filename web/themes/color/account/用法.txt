@@ -1,0 +1,1 @@
+将里面的文件和文件夹放入web/themes/color/account里

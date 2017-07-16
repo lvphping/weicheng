@@ -1,0 +1,286 @@
+﻿{template 'common/header-base'}
+ <?php 
+$total = 0;
+$total = pdo_fetchcolumn('SELECT COUNT(*) FROM' . tablename('article_unread_notice') . ' WHERE uid = :uid AND is_new = 1', array(':uid' => $_W['uid']));
+				 ?>
+
+<div class="head" id="header"> 
+
+	<div class="head_box">
+		<div class="inner wrp">
+			<h1 class="logos"><a href="" title="微信第三方公众平台--后台管理系统"></a></h1>
+			{if defined('IN_SOLUTION')}
+			<ul class="top_navv">
+				{php global $solution,$solutions;}
+				{if $_W['role'] != 'operator'}
+				<li><a href="{url 'home/welcome/ext'}"><i class="fa fa-reply-all"></i>&nbsp;返回公众号功能管理</a></li>
+				{/if}
+				{loop $solutions $row}
+				<li{if $row['name'] == $solution['name']} class="active"{/if}><a href="{url 'home/welcome/solution' array('m' => $row['name'])}"><i class="fa fa-cog"></i>&nbsp;{$row['title']}</a></li>
+				{/loop}
+				{if IMS_FAMILY != 'x'}
+				{/if}
+			</ul>
+			{else}
+			<ul class="top_navv" style="color:#222;">
+				
+				
+				{if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('platform', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'platform'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/platform'}"><i class="fa fa-cog"></i>基础设置</a></li>{/if}
+ <li><a href="{php echo $_W['siteroot'].'web/index.php?c=home&a=welcome&do=ext&m=ewei_shop'}"><i class="pull-right"></i> 人人店管理</a></li>
+             <li><a href="{php echo $_W['siteroot'].'web/index.php?c=site&a=entry&method=cover&p=commission&do=plugin&m=ewei_shop'}"><i class="pull-right"></i>分销快捷设置</a></li>   
+ 
+ 
+
+ 
+
+ 
+ {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('setting', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'setting'} class="active"{/if}><a href="{url 'home/welcome/setting'}" id="liebiaoyuan"><i class="fa fa-umbrella"></i>支付设置</a></li>{/if}
+
+                {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('ext', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'ext'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/ext'}"><i class="fa fa-cubes"></i>营销模块</a></li>{/if}
+ 
+	<!--		   {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('ext', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'ext'} class="active"{/if} id="liebiaoyuan"><a href="$_W['siteroot']./web/index.php?c=home&a=welcome&do=ext&m=ewei_shop"><i class="fa fa-cubes"></i>分销管理</a></li>{/if}-->
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('mc', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'mc'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/mc'}"><i class="fa fa-gift"></i>粉丝营销</a></li>{/if}
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('site', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'site'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/site'}"><i class="fa fa-life-bouy"></i>微站功能</a></li>{/if}
+                
+				
+				
+			
+			</ul> 
+			{/if}
+			<div class="accounts">
+				<div class="account_meta account_info account_meta_primary">
+				{if $_W['account']['name'] == null } <a href="{url 'account/display'}" target="_blank" class="nickname">请选择公众号</a> {/if}
+				<a href="{url 'home/welcome/platform'}" target="_blank" class="nickname">{$_W['account']['name']}</a>
+					<span class="type_wrp">
+						<a href="{url 'account/display'}" target="_blank" class="type icon_subscribe_label">订阅号</a>
+						<a href="{url 'system/welcome'}" target="_blank" class="type icon_verify_label success">已认证</a>
+					</span>  
+		
+		
+			
+		
+		<a href="{url 'home/welcome/platform'}">
+				<img src="{php echo tomedia('headimg_'.$_W['account']['acid'].'.jpg')}?time={php echo time()}" onerror="this.src='resource/images/gw-wx.gif'" alt="{$_W['account']['name']}" class="avatar" width="50" height="50"  />
+				
+					</a>  
+		
+				</div>
+				{if $total > 0}
+				<div id="accountArea" class="account_meta account_inbox account_meta_primary">
+					<li class="dropdown topbar-notice" style=" display: block;">
+						<a type="button" data-toggle="dropdown">
+							<span class="badge" id="notice-total">0</span>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="dLabel">
+							<div class="topbar-notice-panel">
+								<div class="topbar-notice-arrow"></div>
+								<div class="topbar-notice-head">系统公告
+									<a href="{url 'article/notice-show'}" style="float: right;">
+										更多…
+									</a></div>
+									<div class="topbar-notice-body">
+										<ul id="notice-container">
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+						
+					</div>
+					{/if}
+				<div class="account_meta account_logout account_meta_primary">
+					<table border="0" >
+						<tbody><tr>
+					<td > 
+					<div class="checkboxOne">
+  
+	  	<label id="checkboxOneInput"></label>
+  	</div>
+						</td>
+						</tr>
+						<tr>
+					<td>
+						<a id="logout" href="{url 'user/logout'}">退出</a></td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+<!--头部-->
+
+
+<div id="body" class="body">
+
+	<div id="js_container_box" class="container_box cell_layout side_l">
+		<!--左边导航-->	
+		
+ <script src="./resource/hcwechat/cuman.js"></script>
+		
+		{php $frames = empty($frames) ? $GLOBALS['frames'] : $frames; _calc_current_frames($frames);}
+		{if !empty($frames)}
+		<div class="col_side">
+		<div id="search-menu">
+						<input class="form-control input-lg" style="border-radius:0; font-size:14px; height:43px;border: 1px solid #EDEDF1;" type="text" placeholder="输入菜单名称可快速查找">
+					</div>
+			<div class="menu_box" id="menuBar">
+			
+			{loop $frames $k $frame}
+				<dl class="menu">
+			
+					<dt class="menu_title"  data-toggle="collapse"  href="#frame_{$k}" >
+						{if $frame['title']=='粉丝管理'}
+								<i class="fa fa-users"></i>
+								 {elseif $frame['title']=='会员中心'}
+								<i class="fa fa-user"></i> 
+								 {elseif $frame['title']=='会员卡管理'}
+								<i class="fa fa-credit-card"></i> 
+								 {elseif $frame['title']=='积分兑换'}
+								<i class="fa fa-exchange"></i> 
+								 {elseif $frame['title']=='通知中心'}
+								<i class="fa fa-bullhorn"></i> 
+								 {elseif $frame['title']=='微站管理'}
+								<i class="fa fa-life-bouy"></i> 
+								 {elseif $frame['title']=='特殊页面管理'}
+								<i class="fa  fa-file-text-o"></i> 
+								 {elseif $frame['title']=='功能组件'}
+								<i class="fa fa-puzzle-piece"></i> 
+								 {elseif $frame['title']=='基本功能'}
+								<i class="fa fa-cog"></i> 
+								 {elseif $frame['title']=='高级功能'}
+								<i class="fa fa-flask"></i> 
+								 {elseif $frame['title']=='数据统计'}
+								<i class="fa fa-line-chart"></i> 
+								 {elseif $frame['title']=='公众号选项'}
+								<i class="fa fa-comments-o"></i> 
+								 {elseif $frame['title']=='会员及粉丝选项'}
+								<i class="fa fa-user-secret"></i> 
+								 {elseif $frame['title']=='其他功能选项'}
+								<i class="fa fa-cube"></i> 
+								 {elseif $frame['title']=='管理'}
+								<i class="fa fa-wrench"></i> 
+								 {elseif $frame['title']=='主要业务'}
+								<i class="fa fa-th-large"></i> 
+								 {elseif $frame['title']=='营销及活动'}
+								<i class="fa fa-gift"></i> 
+								 {elseif $frame['title']=='客户关系'}
+								<i class="fa fa-share-alt"></i> 
+								 {elseif $frame['title']=='游戏应用'}
+								<i class="fa fa-gamepad"></i> 
+								{elseif $frame['title']=='其他'}
+								<i class="fa fa-ellipsis-h"></i> 
+								{elseif $frame['title']=='展示应用'}
+								<i class="fa fa-desktop"></i> 
+								{else}
+								<i class="fa fa-th-list"></i> 
+								{/if}
+
+						<i class="access" style="background: url(./resource/hcwechat/plugins_z218879.png)  no-repeat;"></i>
+						&nbsp;&nbsp;&nbsp;&nbsp;{$frame['title']}
+					</dt>
+						<div id="frame_{$k}" class="collapse in">
+					{loop $frame['items'] $link}
+					<dd  class="menu_item {$link['active']}" kw="{$link['title']}"><a href="{$link['url']}">{$link['title']}</a></dd>
+							{/loop}	
+									</div>
+				</dl>
+				
+					
+					
+			
+			{/loop}
+			</div>
+			
+		</div>
+		
+
+		{/if}
+				{if defined('IN_MESSAGE')}
+			<div class="col_main">
+			
+					<div class="page_error_msg">
+	                <div class="inner">
+	                    <span class="icon_wrp">
+	                        <i class="icon_page_error">
+	                            <i style="margin-top: 20px; color:#FBC15E;" class="fa fa-4x fa-{if $label=='success'}check-circle{/if}{if $label=='danger'}times-circle{/if}{if $label=='info'}info-circle{/if}{if $label=='warning'}exclamation-triangle{/if}"></i>
+	                        </i>
+	                    </span>
+	                    <div class="msg_content">
+	           {if is_array($msg)}
+								<h2>MYSQL 错误：</h2>
+								<p>{php echo cutstr($msg['sql'], 300, 1);}</p>
+								<p><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</p>
+							{else}
+							<h2>{$caption}</h2>
+							<h2>{$msg}</h2>
+							{/if}
+							{if $redirect}
+							<h2><a href="{$redirect}" class="alert-link">如果你的浏览器没有自动跳转，请点击此链接</a></h2>
+							<script type="text/javascript">
+								setTimeout(function () {
+									location.href = "{$redirect}";
+								}, 3000);
+							</script>
+							{else}
+								<h2>[<a href="javascript:history.go(-1);" class="alert-link">点击这里返回上一页</a>] &nbsp; [<a href="./?refresh" class="alert-link">首页</a>]</h2>
+							{/if}
+	                    </div>
+	                </div>
+	              </div>
+	 </div>              
+				
+		
+		
+				{/if}
+		<!--左边导航-->
+		
+		<!--中间-->	
+		
+	<!--中间-->	
+	<div class="col_main">
+
+
+	
+
+<script>
+	
+$(function(){
+	
+$("#menuBar dl").first().addClass("no_extra");
+
+	$("#menuBar dd").click(function(){
+
+		$("#menuBar dd").removeClass("selected");
+		$(this).addClass("selected");
+	});
+});
+	
+</script>
+<script type="text/javascript">
+						require(['bootstrap'], function(){
+							$('.ext-type').click(function(){
+								var id = $(this).data('id');
+								util.cookie.del('ext_type');
+								util.cookie.set('ext_type', id, 8640000);
+								location.reload();
+								return false;
+							});
+
+							$('#search-menu input').keyup(function() {
+								var a = $(this).val();
+								$('.col_side .menu_item,  .col_side .menu_title, .col_side .menu').hide();
+								$('.col_side .menu_item').each(function() {
+									$(this).css('border-left', '0');
+									if(a.length > 0 && $(this).attr('kw').indexOf(a) >= 0) {
+										$(this).parents(".menu_box").find('.menu').show();
+										$(this).show().css('border-left', '3px #44b549 outset');
+									}
+								});
+								if(a.length == 0) {
+								$('.col_side .menu_item,  .col_side .menu_title, .col_side .menu').show();
+								}
+							});
+						});
+</script>

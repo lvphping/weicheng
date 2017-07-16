@@ -1,0 +1,216 @@
+{template 'common/header-base'}
+{if !empty($_W['uniacid']) && !defined('IN_MESSAGE')}
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed side-overlay-o gw-container">
+{else}
+<div id="page-container" class="sidebar-l sidebar-o side-scroll header-navbar-fixed side-overlay-o gw-container" style="padding-left:0px">
+{/if}
+   {if !empty($_W['uniacid']) && !defined('IN_MESSAGE')}  
+
+    <nav id="sidebar">
+
+                <div id="sidebar-scroll" style="">
+
+                    <div class="sidebar-content">
+
+                        <div class="side-header side-content bg-white-op" >
+
+                            <button class="btn btn-link text-gray pull-right hidden-md hidden-lg" type="button" data-toggle="layout" data-action="sidebar_close">
+                                <i class="fa fa-times"></i>
+                            </button>
+
+                            
+                            <a class="gw-logo"  href="./?refresh"{if !empty($_W['setting']['copyright']['blogo'])}style="background:url('{php echo tomedia($_W['setting']['copyright']['blogo']);}');"{/if}></a>
+                        </div>
+
+                        <div class="side-content">
+                            <ul class="nav-main">
+
+                            <li class="nav-main-heading"><span class="sidebar-mini-hide">管理当前公众号</span></li>
+                                <li>
+                                    <a class="active" href="{url 'home/welcome/platform'}" target="_blank"><i class="fa fa-asterisk fa-spin"></i><span class="sidebar-mini-hide">{$_W['account']['name']}</span></a>
+                                </li>
+                            <li class="nav-main-heading"><span class="sidebar-mini-hide">快捷入口</span></li>    
+                                <li>
+                                    <a href="{url 'account/display'}" ><i class="fa fa-comments"></i><span class="sidebar-mini-hide">公众号管理</span></a>
+                                </li>
+                                {if $_W['role'] == 'founder'}
+                                <li>
+                                    <a href="{url 'system/welcome'}" ><i class="fa fa-cogs"></i><span class="sidebar-mini-hide">系统管理</span></a>
+                                </li>
+                                {/if}
+                                <!-- <li class="nav-main-heading"><span class="sidebar-mini-hide">User Interface</span></li>
+                                <li>
+                                    <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-badge"></i><span class="sidebar-mini-hide">UI Elements</span></a>
+                                    <ul>
+                                        <li>
+                                            <a href="base_ui_widgets.html">Widgets</a>
+                                        </li>
+                                   </ul>
+                                </li> -->
+                           </ul>
+                        </div>
+                        
+                    </div>
+                  
+                </div>
+              
+    </nav>
+            
+
+
+    <header id="header-navbar" class="content-mini content-mini-full">
+
+        <ul class="nav-header pull-right">
+
+            <li>
+                <div class="btn-group">
+                    <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
+                        <img src="{$_W['attachurl']}headimg_{$_W['uniacid']}.jpg?$acid={$_W['uniacid']}" onerror="this.src='resource/images/gw-wx.gif'" />
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-header">{$_W['user']['username']} ({if $_W['role'] == 'founder'}系统管理员{elseif $_W['role'] == 'manager'}公众号管理员{else}公众号操作员{/if})</li>
+                        <li>
+                            <a tabindex="-1" href="{url 'home/welcome/platform'}">
+                                <i class="fontello-icon-comment-alt-1 pull-right"></i>
+                                {$_W['account']['name']}
+                            </a>
+                        </li>
+
+                        {if $_W['role'] != 'operator'}
+                        <li>
+                            <a tabindex="-1" href="{url 'account/post' array('uniacid' => $_W['uniacid'])}" target="_blank">
+                                <i class="fontello-icon-edit pull-right"></i>编辑当前账号资料
+                            </a>
+                        </li>
+                        {/if}
+                        <li>
+                            <a tabindex="-1" href="{url 'account/display'}" target="_blank">
+                                <i class="fontello-icon-chat-1 pull-right"></i>管理其它公众号
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="-1" href="{url 'utility/emulator'}" target="_blank">
+                                <i class="fontello-icon-edit-2 pull-right"></i>模拟测试
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+
+                        <li><a href="{url 'user/profile/profile'}" target="_blank"><i class="fontello-icon-vcard pull-right"></i> 我的账号</a></li>
+                {if $_W['role'] == 'founder'}
+                <li><a href="{url 'system/welcome'}" target="_blank"><i class="fontello-icon-cog-alt pull-right"></i> 系统选项</a></li>
+                <li><a href="{url 'system/welcome'}" target="_blank"><i class="fontello-icon-spin3 pull-right"></i> 自动更新</a></li>
+                <li><a href="{url 'system/updatecache'}" target="_blank"><i class="fontello-icon-loop-alt pull-right"></i> 更新缓存</a></li>
+                <li class="divider"></li>
+                {/if}
+                {if $_W['uid']}
+                <li><a href="{url 'user/logout'}"><i class="fontello-icon-logout-1 pull-right"></i> 退出系统</a></li>
+                {/if}
+                    </ul>
+                </div>
+            </li>
+            
+        </ul>
+
+        <ul class="nav-header pull-left">
+            <li class="hidden-md hidden-lg"style="margin-right: 1px;">
+
+                <button class="btn btn-default" data-toggle="layout" data-action="sidebar_toggle" type="button">
+                    <i class="fa fa-navicon"></i>
+                </button>
+            </li>
+            <li class="hidden-xs hidden-sm">
+
+                <button class="btn btn-default" data-toggle="layout" data-action="sidebar_mini_toggle" type="button">
+                    <i class="fa fa-ellipsis-v"></i>
+                </button>
+            </li>                                                           
+        </ul>
+    </header>                                                                          
+ {elseif empty($_W['uniacid']) && !defined('IN_MESSAGE')}
+
+<header id="header-navbar" class="content-mini content-mini-full" style="left:0px">
+    <ul class="nav-header pull-right"> 
+    	<li>
+    	<div class="btn-group">
+            <button class="btn btn-default btn-image dropdown-toggle" data-toggle="dropdown" type="button">
+                <img {if file_exists(IA_ROOT . '/attachment/headimg_'.$account['acid'].'.jpg')} src="{$_W['attachurl_local']}headimg_{$account['acid']}.jpg?acid={$account['acid']}"{else}src="resource/images/gw-wx.gif"{/if} onerror="this.src='resource/images/gw-wx.gif'" />
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-right">
+                
+                <li>
+                    <a tabindex="-1" href="{url 'account/display'}" target="_blank">
+                        <i class="fontello-icon-chat-1 pull-right"></i>公众号管理
+                    </a>
+                </li>
+                <li>
+	                <a href="{url 'system/welcome'}">
+						<i class="fontello-icon-cog-alt pull-right"></i>系统管理
+					</a>
+				</li>
+        		<li><a href="{url 'user/logout'}"><i class="fontello-icon-logout-1 pull-right"></i> 退出系统</a>
+        		</li>
+            </ul>
+         </div>
+        </li>          
+    </ul>
+
+    <ul class="nav-header pull-left">
+        <li>
+            <a class="gw-logo"  href="./?refresh"{if !empty($_W['setting']['copyright']['blogo'])}style="background:url('{php echo tomedia($_W['setting']['copyright']['blogo']);}') no-repeat;"{/if}>
+                
+            </a>
+        </li>                                                 
+    </ul>
+
+ </header> 
+{/if}
+
+<main id="main-container">
+
+    <div class="content content-boxed">
+
+        <div class="block">
+            <div class="block-content block-content-narrow"> 
+
+        {if defined('IN_MESSAGE')}
+
+            <div class="row text-center">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                <div class="alert alert-{$label} alert-dismissable">
+                    
+                    {if is_array($msg)}
+                        <h3 class="font-w300 push-15">MYSQL 错误：</h3>
+                        <p>{php echo cutstr($msg['sql'], 300, 1);}</p>
+                        <p><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</p>
+                    {else}
+                    <h3 class="font-w300 push-15"><i class="fa fa-{if $label=='success'}check-circle{/if}{if $label=='danger'}times-circle{/if}{if $label=='info'}info-circle{/if}{if $label=='warning'}exclamation-triangle{/if}"></i> {$msg}</h3>
+                    {/if}
+                    {if $redirect}
+                    <p><a href="{$redirect}">如果你的浏览器没有自动跳转，请点击此链接</a></p>
+                    <script type="text/javascript">
+                        setTimeout(function () {
+                            location.href = "{$redirect}";
+                        }, 3000);
+                    </script>
+                    {else}
+                        <p>[<a href="javascript:history.go(-1);">点击这里返回上一页</a>] &nbsp; [<a href="./?refresh">首页</a>]</p>
+                    {/if}
+                </div>
+            </div>    
+        </div>
+        {else}
+        <div style="margin-bottom: 50px;">
+        {/if}
+<script>
+    var h = document.documentElement.clientHeight;
+    $("#main-container").css('min-height',h-60);
+     require(['bootstrap'],function($){
+        $('[data-toggle="tooltip"]').hover(function(){
+            $(this).tooltip('show');
+        },function(){
+            $(this).tooltip('hide');
+        });
+    });
+</script>

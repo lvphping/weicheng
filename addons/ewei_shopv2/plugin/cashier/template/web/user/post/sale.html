@@ -1,0 +1,27 @@
+<div class="form-group">
+	<label class="col-sm-2 control-label">可用优惠卷</label>
+	<div class="col-sm-8 col-xs-12">
+		{ife 'cashier.user' $item}
+			<?php echo tpl_selector('couponid',array(
+			'preview'=>true,
+			'readonly'=>true,
+			'multi'=>1,
+			'value'=>null,
+			'url'=>webUrl('sale/coupon/querycoupons'),
+			'items'=>$coupon,
+			'buttontext'=>'选择优惠券',
+			'placeholder'=>'请选择优惠券')
+			)
+			?>
+		{else}
+		<div class="input-group multi-img-details container ui-sortable">
+			{loop $coupon $print}
+			<div data-name="printerid" data-id="{$print['id']}" class="multi-item">
+				<img src="{php echo tomedia($print['thumb'])}" class="img-responsive img-thumbnail">
+				<div class="img-nickname">{$print['title']}</div>
+			</div>
+			{/loop}
+		</div>
+		{/if}
+	</div>
+</div>

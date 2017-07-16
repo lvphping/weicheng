@@ -1,0 +1,127 @@
+{template 'common/header'}
+    <link onerror="wx_loaderror(this)" rel="stylesheet" type="text/css" href="./resource/hcwechat/public_notice.css"> 
+ <?php 
+ global $_W;
+$uniacid = empty($uniacid) ? $_W['uniacid'] : 0;
+$accounttype = 
+     pdo_fetch("SELECT * FROM " . tablename('account_wechats') . " WHERE uniacid = :uniacid ", array(':uniacid' => $uniacid));
+$isconnect = 
+     pdo_fetch("SELECT * FROM " . tablename('account') . " WHERE uniacid = :uniacid ", array(':uniacid' => $uniacid));
+$num = pdo_fetchcolumn('SELECT COUNT(fanid) FROM '.tablename('mc_mapping_fans').' WHERE uniacid=:uniacid AND follow=1', array(':uniacid'=> $_W['uniacid']));
+	$fansnum = intval($num);
+if ( pdo_tableexists('stat_fans'))
+{ $today_stat = pdo_get('stat_fans', array('date' => date('Ymd'), 'uniacid' => $_W['uniacid']));
+$today_add_num = intval($today_stat['new']); //今日新增
+$today_cancel_num = intval($today_stat['cancel']);//今日取消
+$today_jing_num = $today_add_num - $today_cancel_num;//今日净增
+} else {
+
+$today_add_num = pdo_fetchcolumn('SELECT COUNT(*) FROM ' . tablename('mc_mapping_fans') . ' WHERE acid = :acid AND uniacid = :uniacid AND follow = :follow AND followtime >= :starttime AND followtime <= :endtime', array(':acid' => $_W['acid'], ':uniacid' => $_W['uniacid'], ':starttime' => strtotime(date('Y-m-d')), ':endtime' => TIMESTAMP, ':follow' => 1));
+$today_cancel_num = pdo_fetchcolumn('SELECT COUNT(*) FROM ' . tablename('mc_mapping_fans') . ' WHERE acid = :acid AND uniacid = :uniacid AND follow = :follow AND unfollowtime >= :starttime AND unfollowtime <= :endtime', array(':acid' => $_W['acid'], ':uniacid' => $_W['uniacid'], ':starttime' => strtotime(date('Y-m-d')), ':endtime' => TIMESTAMP, ':follow' => 0));
+$today_jing_num = $today_add_num - $today_cancel_num;
+	
+}
+
+$percent =  round(($today_jing_num/$fansnum)*100,2); //新增百分比
+
+$starttime1 = strtotime(date("Y-m-d",time()));
+$endtime1 = $starttime1 + 3600*24;
+$chatnum = pdo_fetchcolumn("SELECT COUNT(id) FROM ".tablename('stat_msg_history')." WHERE uniacid = :uniacid AND createtime >= :starttime1 AND createtime < :endtime1 and type='text'" , array(':uniacid'=> $_W['uniacid'],':starttime1'=>$starttime1,':endtime1'=>$endtime1));
+?>
+<style type="text/css">
+	
+.notice_number_x h5, h6 {
+	line-height: 18px;
+font-size: 100%;
+margin: 0;
+font-weight: 400;
+}
+.cuman{
+
+	margin: 0 auto;
+}
+
+</style>
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo url('home/welcome/' . $do);}">账号概况 - {$title}</a></li>
+</ul>
+
+<div class="clearfix welcome-container">
+	{if $do != 'ext'}
+
+<div class="index_show_area">
+    <div class="index_tap added">
+        <ul class="inner">
+            <li class="grid_item size1of2 index_tap_item added_message">
+            <a href="{php echo url('platform/stat/history')}">
+                <span class="tap_inner">
+                    <i class="icon_index_tap"></i>
+                    <em class="number">{$chatnum}</em>
+                    <strong class="title">新消息</strong>
+                </span>
+            </a>
+            </li>
+            <li class="grid_item size1of2 no_extra index_tap_item added_fans">
+                        <a href="{php echo url('account/summary/', array('acid' => $_W['acid'], 'uniacid' => $_W['uniacid']));}">
+                            <span class="tap_inner no_extra">
+                    <i class="icon_index_tap"></i>
+                                        <em class="number">{$today_add_num}</em>
+                    <strong class="title">新增人数</strong>
+                                    </span>
+            </a>
+            </li>
+        </ul>
+    </div>&nbsp;
+    <div class="index_tap total">
+        <ul class="inner">
+            <li class="index_tap_item total_fans extra">
+            <a href="{php echo url('mc/fans')}">
+                <span class="tap_inner">
+                    <i class="icon_index_tap"></i>
+                    <em class="number">{$fansnum}</em>
+                    <strong class="title">总用户数</strong>
+                </span>
+            </a>
+            </li>
+        </ul> 
+    </div>
+</div>
+
+
+
+	<div class="page-header">
+		<h4><i class="fa fa-plane"></i> 快捷操作</h4>
+	</div>
+	<div class="shortcut clearfix">
+		<a href="{php echo url('platform/reply', array('m' => 'userapi'))}">
+			<i class="fa fa-sitemap"></i>
+			<span>自定义接口</span>
+		</a>
+		{loop $shortcuts $shortcut}
+			<a href="{$shortcut['link']}" title="{$shortcut['title']}">
+				<img src="{$shortcut['image']}" alt="{$shortcut['title']}" class="img-rounded" />
+				<span>{$shortcut['title']}</span>
+			</a>
+		{/loop}
+	</div>
+	{/if}
+	{if $do == 'platform'}
+	{template 'home/welcome-platform'}
+	{/if}
+	{if $do == 'site'}
+	{template 'home/welcome-site'}
+	{/if}
+	{if $do == 'mc'}
+	{template 'home/welcome-mc'}
+	{/if}
+	{if $do == 'setting'}
+	{template 'home/welcome-setting'}
+	{/if}
+	{if $do == 'ext'}
+	{template 'home/welcome-ext'}
+	{/if}
+	{if $do == 'solution'}
+	{template 'home/welcome-solution'}
+	{/if}
+</div>
+{template 'common/footer'}

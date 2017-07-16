@@ -1,0 +1,59 @@
+{template '_header'}
+<link rel="stylesheet" href="../addons/ewei_shopv2/plugin/task/static/style/goods.css" />
+{if $taskinfo['task_type']==1}
+<div class="fui-goods-group container" >
+    {if !empty($goodslist)}
+    {loop $goodslist $goodsid $value}
+    <div class="fui-goods-item" >
+        <a href="{php echo mobileUrl('goods/detail',array('id'=>$goodsid,'join_id'=>$taskinfo['join_id']),true);}">
+            <div class="image" data-lazyloaded="true" style="background-image: url('{$value['thumb']}');">
+            </div>
+        </a>
+            <div class="detail">
+                <a href="{php echo mobileUrl('goods/detail',array('id'=>$goodsid),true);}">
+                <div class="name">{$value['title']}</div>
+                </a>
+                <div class="price">
+                    <span class="text">￥{$value['marketprice']}</span>
+                </div>
+            </div>
+
+    </div>
+    {/loop}
+    {else}
+    <div class="text-center" >无特价商品信息</div>
+    {/if}
+</div>
+{elseif $taskinfo['task_type']==2}
+    {if !empty($goodslist)}
+    {loop $goodslist $rank $val}
+        {loop $val $goodsid $value}
+            <div class="fui-goods-group container" >
+                <div class="fui-goods-item" >
+                    <a href="{php echo mobileUrl('goods/detail',array('id'=>$goodsid,'rank'=>$rank,'join_id'=>$taskinfo['join_id']),true);}">
+                        <div class="image" data-lazyloaded="true" style="background-image: url('{$value['thumb']}');">
+                        </div>
+                    </a>
+                    <div class="detail">
+                        <a href="{php echo mobileUrl('goods/detail',array('id'=>$goodsid),true);}">
+                            <div class="name">{$value['title']}</div>
+                        </a>
+                        <div class="price">
+                            <span class="text">￥{$value['marketprice']}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/loop}
+    {/loop}
+    {else}
+    <div class="text-center" >无特价商品信息</div>
+    {/if}
+{else}
+    <div class="fui-goods-group container" >
+        <div class="fui-goods-item" >
+            <div class="text-center" >无特价商品信息</div>
+        </div>
+    </div>
+{/if}
+{template '_footer'}

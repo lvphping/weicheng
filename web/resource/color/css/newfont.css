@@ -1,0 +1,59 @@
+/*** -----------------------------------------------------------------------------------------------
+
+	ADMIN TEMPLATE | BOO Admin Template
+	----------------------------------------
+
+	EXTENSION STYLE - External stylesheed
+	
+	filename			:	asset/css/extension.css
+	version				:	16.11.2012
+	copyright			:	(c) 2012 Petr Marasek
+	contact				:	gootoboo@gmail.com
+	
+	-------------------------------------------------------------------------------------------- ***/
+
+/* FONTS */
+/* Picto font & Icon */
+@import "../fonts/fontello/css/fontello.css";
+@import "../fonts/fontello/css/animation.css";
+@import "../fonts/awesome/css/font-awesome.css";
+
+/*@import "icon-fugue.min.css";*/
+
+
+@font-face {
+        font-family: 'ForteMT';
+        src: url('../fonts/forte/forte.eot');
+        src: url('../fonts/forte/forte.eot?#iefix') format('embedded-opentype'),
+             url('../fonts/forte/forte.woff') format('woff'),
+             url('../fonts/forte/forte.ttf') format('truetype'),
+             url('../fonts/forte/forte.svg#forte') format('svg');
+        font-weight: normal;
+        font-style: normal;
+}
+[class^="fontello-icon-"]:before, [class*=" fontello-icon-"]:before {
+  font-family: 'fontello';
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  text-decoration: inherit;
+  /* margin-right: 0.2em; */
+  text-align: center;
+  /* opacity: 0.7; */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+  line-height: 1em;
+  /* font-size: 120%; */
+  font-size: 1.166em;
+}
+
+.codesOn .i-name {
+  display: none;
+}
+.codesOn .i-code {
+  display: inline;
+}
+.i-code {
+  display: none;
+}

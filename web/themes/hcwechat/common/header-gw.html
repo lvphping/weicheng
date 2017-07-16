@@ -1,0 +1,109 @@
+{template 'common/header-base'}
+ <?php 
+$total = 0;
+$total = pdo_fetchcolumn('SELECT COUNT(*) FROM' . tablename('article_unread_notice') . ' WHERE uid = :uid AND is_new = 1', array(':uid' => $_W['uid']));
+				 ?>
+<div class="gw-container">
+<div class="head" id="header"> 
+
+	<div class="head_box">
+		<div class="inner wrp">
+			<h1 class="logos"><a href="" title="微信号营销致力成为微信·互联综合解决方案服务商！"></a></h1>
+
+			<ul class="top_navv">
+	
+				<li{if $_W['page']['title'] == '公众号列表 - 公众号'} class="active"{/if}><a href="{url 'account/display'}"><i class="fa fa-comments"></i>&nbsp;公众号管理</a></li>
+				<li {if $_W['page']['title'] == '系统'} class="active"{/if}><a href="{url 'system/welcome'}"><i class="fa fa-cog"></i>&nbsp;系统设置</a></li>
+				<!--<li{if $_W['page']['title'] == '模拟测试'} class="active"{/if}><a href="{url 'utility/emulator'}" target="_blank"><i class="fa fa-mobile fa-fw"></i>&nbsp;模拟测试</a></li>
+				<li><a href="{url 'article/news-show'}&do=list" target="_blank" ><i class="fa fa-bell-o"></i></a>
+				<a href="{url 'article/notice-show'}&do=list" target="_blank" >公告</a>
+				</li>-->
+
+			</ul> 
+
+			<div class="accounts">
+				<div class="account_meta account_info account_meta_primary">
+					{if $_W['account']['name'] == null } <a href="{url 'account/display'}" target="_blank" class="nickname">请选择公众号</a> {/if}
+					<a href="{url 'home/welcome/platform'}" target="_blank" class="nickname">{$_W['account']['name']}</a>
+					<span class="type_wrp">
+						<a href="{url 'account/display'}" target="_blank" class="type icon_subscribe_label">微信号营销-最好用的微信营销插件</a>
+						<a href="{url 'system/welcome'}" target="_blank" class="type icon_verify_label success">微信号营销-最好用的微信营销插件</a>
+					</span>  
+
+					<a href="{url 'home/welcome/platform'}">
+						<img src="{php echo tomedia('headimg_'.$_W['account']['acid'].'.jpg')}?time={php echo time()}" onerror="this.src='resource/images/gw-wx.gif'" alt="{$_W['account']['name']}" class="avatar" width="50" height="50"  />		
+					</a>   
+             
+				</div>
+				{if $total > 0}
+				<div id="accountArea" class="account_meta account_inbox account_meta_primary">
+				<li class="dropdown topbar-notice" style=" display: block;">
+					<a type="button" data-toggle="dropdown">
+						<span class="badge" id="notice-total">0</span>
+					</a>
+					<div class="dropdown-menu" aria-labelledby="dLabel">
+						<div class="topbar-notice-panel">
+							<div class="topbar-notice-arrow"></div>
+							<div class="topbar-notice-head">系统公告
+							<a href="{url 'article/notice-show'}" style="float: right;">
+                                        更多…
+                                    </a></div>
+							<div class="topbar-notice-body">
+								<ul id="notice-container">
+								</ul>
+							</div>
+						</div>
+					</div>
+				</li>
+						
+					</div>
+{/if}
+				<div class="account_meta account_logout account_meta_primary">
+					<a id="logout" href="{url 'user/logout'}">退出</a>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
+<!--头部-->
+
+	
+	<div class="container-fluid" style="margin-top:20px;">
+		{if defined('IN_MESSAGE')}
+		<div>
+			<div class="jumbotron clearfix alert alert-{$label}">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+						<i class="fa fa-5x fa-{if $label=='success'}check-circle{/if}{if $label=='danger'}times-circle{/if}{if $label=='info'}info-circle{/if}{if $label=='warning'}exclamation-triangle{/if}"></i>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+						{if is_array($msg)}
+							<h2>MYSQL 错误：</h2>
+							<p>{php echo cutstr($msg['sql'], 300, 1);}</p>
+							<p><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</p>
+						{else}
+						<h2>{$caption}</h2>
+						<p>{$msg}</p>
+						{/if}
+						{if $redirect}
+						<p><a href="{$redirect}" class="alert-link">如果你的浏览器没有自动跳转，请点击此链接</a></p>
+						<script type="text/javascript">
+							setTimeout(function () {
+								location.href = "{$redirect}";
+							}, 3000);
+						</script>
+						{else}
+							<p>[<a href="javascript:history.go(-1);" class="alert-link">点击这里返回上一页</a>] &nbsp; [<a href="./?refresh" class="alert-link">首页</a>]</p>
+						{/if}
+					</div>
+				</div>
+			</div>
+		{else}
+		<div class="well">
+		{/if}
+<script>
+	require(['jquery'],function($){
+		var h = document.documentElement.clientHeight;
+		$(".gw-container").css('min-height',h);
+	});
+</script>

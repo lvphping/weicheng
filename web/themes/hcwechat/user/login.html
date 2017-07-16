@@ -1,0 +1,49 @@
+{template 'common/header-login'}
+ <?php 
+				 $news = pdo_fetchall('SELECT * FROM ' . tablename('article_news') . ' WHERE is_display = 1 AND is_show_home = 1 ORDER BY displayorder DESC LIMIT ' .'1', array(), 'id');
+				 $notices = pdo_fetchall('SELECT * FROM ' . tablename('article_notice') . ' WHERE is_display = 1 AND is_show_home = 1 ORDER BY displayorder DESC LIMIT ' . '1', array(), 'id');
+				 ?>
+				 
+<div class="head" id="header">            <div class="head_box">                <div class="inner wrp">                    <h1 class="logo">                        <a href="" title=""></a>                    </h1>                    <div class="account">                        <div class="account_meta account_faq">                            第一次使用营销平台？<a href="{url 'user/register'}">立即注册</a>                        </div>                    </div>                </div>            </div>            <div class="banner">                <div class="inner wrp">                                        <div class="login_frame">                        <h3>登录</h3>                        <div class="login_err_panel" style="display:none;" id="err"> </div>                        <form action="" method="post" role="form" onsubmit="return formcheck();">                            <div class="login_input_panel" id="js_mainContent">                                <div class="login_input">                                    <i class="icon_login un"> </i>									<input name="username" type="text" class="form-control input-lg" placeholder="请输入用户名登录">                                </div>                                <div class="login_input">                                    <i class="icon_login pwd"> </i>                                    <input name="password" type="password" class="form-control input-lg" placeholder="请输入登录密码">                                </div>                            </div>                            <div class="verifycode" style="display:none;" id="verifyDiv">                                <span class="frm_input_box">                                    <input class="frm_input" type="text" id="verify" name="verify">                                </span>                                <img id="verifyImg" src="">                                <a href="javascript:;" id="verifyChange">换一张</a>                            </div>                            <div class="login_help_panel">                               <label class="checkbox-inline input-lg">							<input type="checkbox" value="true" name="rember"> 记住大名						</label>                                <a class="login_forget_pwd" href="{url 'user/register'}">注册新账号</a>                            </div>                            <div class="login_btn_panel">								<input type="submit" name="submit" value="登录" class="btn_login" />								<input name="token" value="{$_W['token']}" type="hidden" />								                            </div>                        </form>                    </div>                                        <dl class="qrcode_panel">                        <dt>                                               </dt>                        <dd>                            <br></dd>                    </dl>                </div>            </div>        </div>        <div id="body" class="body page_login">                       
+	{if !empty($news) || !empty($notices)}
+	 <dl class="notices_box">                
+		
+<dt>                    <i class="icon_login speaker"></i>系统公告                </dt>                                                     
+	{loop $news $new}
+  <dd>                    <i>●</i>                   
+										<a class="notices_title" target="_blank" href="{php echo url('article/news-show/detail', array('id' => $new['id']));}">{$new['title']}</a>
+								
+	  <span class="label_new"></span>                </dd>    	{/loop}                 
+	  	         		{loop $notices $notice}  <dd>                    <i>●</i>                   
+	  	           
+										<a class="notices_title"  target="_blank" href="{php echo url('article/notice-show/detail', array('id' => $notice['id']));}">{$notice['title']}</a>
+						
+	  	           	                 <span class="label_new"></span>                </dd>   			{/loop}                                                               <dd class="extra">                    <a href="{php echo url('article/news-show/list');}" target="_blank">查看更多<i class="icon_arrow"></i>                    </a>                </dd>            </dl>       
+		{/if}
+<div class="mp_kind_mod">
+                <div class="mp_kind_mod_hd">
+                </div>
+                <div class="mp_kind_mod_bd group">
+                    <a href="#"  class="mp_kind_wrp">
+                        <dl class="mp_kind">
+                            <dt class="name"><span class="icon_mp_kind service"></span>多用户分权管理</dt>
+                            <dd>微信营销多用户接口平台管理系统可简单的实现管理员与各个用户间的授权与管理！ </dd>
+                        </dl>
+                    </a>
+                    <a href="#"  class="mp_kind_wrp">
+                        <dl class="mp_kind">
+                            <dt class="name"><span class="icon_mp_kind subscribe"></span>功能模块化</dt>
+                            <dd>微信营销平台强化了功能模块的管理与应用，方便微信开发者出售与发布！</dd>
+                        </dl>
+                    </a>
+					<a href="#"  class="mp_kind_wrp">
+                        <dl class="mp_kind">
+                            <dt class="name"><span class="icon_mp_kind enterprise"></span>成熟的开源系统</dt>
+                            <dd>高度的安全特性！100%的自由控制！便于二次开发的开源微信平台管理系统</dd>
+                        </dl>
+                    </a>
+                </div>
+            </div>
+          
+ <script onerror="wx_loaderror(this)" type="text/javascript" src="./resource/hcwechat/jquery-1.9.1218878.js">        </script>        <script onerror="wx_loaderror(this)" type="text/javascript" src="./resource/hcwechat/login_new218877.js">        </script>		
+{template 'common/footer'}

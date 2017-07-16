@@ -1,0 +1,333 @@
+﻿{template 'common/header-base'}
+<header>
+<link rel="stylesheet" type="text/css" href="./resource/mpqq/public_notice.css">
+<a href="{url 'account/display'}" class="header_l"><h1 class="logo">微信第三方公众平台--后台管理系统</h1></a>
+<ul class="header_nav">
+
+
+
+	{if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('platform', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'platform'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/platform'}"><i class="fa fa-cog"></i>基础设置</a></li>{/if}
+ <li><a href="{php echo $_W['siteroot'].'web/index.php?c=home&a=welcome&do=ext&m=ewei_shop'}"><i class="pull-right"></i> 人人店管理</a></li>
+             <li><a href="{php echo $_W['siteroot'].'web/index.php?c=site&a=entry&method=cover&p=commission&do=plugin&m=ewei_shop'}"><i class="pull-right"></i>分销快捷设置</a></li>   
+ 
+ 
+
+ 
+
+ 
+ {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('setting', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'setting'} class="active"{/if}><a href="{url 'home/welcome/setting'}" id="liebiaoyuan"><i class="fa fa-umbrella"></i>支付设置</a></li>{/if}
+
+                {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('ext', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'ext'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/ext'}"><i class="fa fa-cubes"></i>营销模块</a></li>{/if}
+ 
+	<!--		   {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('ext', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'ext'} class="active"{/if} id="liebiaoyuan"><a href="$_W['siteroot']./web/index.php?c=home&a=welcome&do=ext&m=ewei_shop"><i class="fa fa-cubes"></i>分销管理</a></li>{/if}-->
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('mc', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'mc'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/mc'}"><i class="fa fa-gift"></i>粉丝营销</a></li>{/if}
+			  {if !empty($_W['isfounder']) || empty($_W['setting']['permurls']['sections']) || in_array('site', $_W['setting']['permurls']['sections'])}<li{if FRAME == 'site'} class="active"{/if} id="liebiaoyuan"><a href="{url 'home/welcome/site'}"><i class="fa fa-life-bouy"></i>微站功能</a></li>{/if}
+                
+			
+			
+	</ul> 
+    <div class="header_r">
+    <ul class="nav navbar-nav navbar-right">
+
+    <li class="dropdown topbar-notice"><a type="button" data-toggle="dropdown"><i class="fa fa-bell"></i> 
+<span class="badge" id="notice-total">0</span></a>
+<div class="dropdown-menu" aria-labelledby="dLabel">
+<div class="topbar-notice-panel">
+<div class="topbar-notice-arrow"></div>
+<div class="topbar-notice-head"><span>系统公告</span> 
+</div>
+<div class="topbar-notice-body"><ul id="notice-container"></ul></div>
+<button class="btn btn-primary btn-square btn-block" onclick = " window.location.href='{php echo url('article/notice-show/list');}'; ">更多公告</button>
+</div></div></li>
+  <li class="dropdown dropdown-user">
+<a href="javascript:;" class="dropdown-toggle hover-initialized header_avatar" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+
+ <img class="avatar" src="{php echo tomedia('headimg_'.$_W['account']['acid'].'.jpg')}?time={php echo time()}" onerror="this.src='resource/images/gw-wx.gif'" alt="{$_W['account']['name']}">
+            <strong class="header_name">{if $_W['account']['name'] == null } <a href="{url 'account/display'}" target="_blank" >请选择公众号</a> {/if}
+            {$_W['account']['name']}</strong>
+                   
+</a>
+<ul class="dropdown-menu dropdown-menu-default">
+ <li class="dropdown-header"></i>{$_W['user']['username']} ({if $_W['role'] == 'founder'}系统管理员{elseif $_W['role'] == 'manager'}公众号管理员{else}公众号操作员{/if}) </li>
+ {if $_W['role'] != 'operator'}
+ <li class="divider"></li>
+                        <li><a href="{url 'account/post' array('uniacid' => $_W['uniacid'])}" target="_blank"><i class="fa fa-weixin fa-fw"></i> 编辑公众号资料</a></li>
+                        {/if}
+                        <li><a href="{url 'account/display'}" target="_blank"><i class="fa fa-cogs fa-fw"></i> 管理其它公众号</a></li>
+                        <li><a href="{url 'utility/emulator'}" target="_blank"><i class="fa fa-mobile fa-fw"></i> 模拟测试</a></li>
+<li class="divider"></li>
+                <li><a href="{url 'user/profile/profile'}"><i class="fa fa-pencil-square-o fa-fw"></i>&nbsp;修改密码</a></li>
+                <li><a href="{url 'user/profile/base'}"><i class="fa fa-user fa-fw"></i>&nbsp;个人信息</a></li>
+{if $_W['role'] == 'founder'}
+                <li class="divider"></li>
+                <li><a href="{url 'system/welcome'}" target="_blank"><i class="fa fa-sitemap fa-fw"></i>&nbsp;系统选项</a></li>
+                <li><a href="{url 'system/welcome'}" target="_blank"><i class="fa fa-cloud-download fa-fw"></i>&nbsp;自动更新</a></li>
+                <li><a href="{url 'system/updatecache'}" target="_blank"><i class="fa fa-refresh fa-fw"></i>&nbsp;更新缓存</a></li>
+                
+                        {/if}
+        
+</ul>
+
+
+</li>
+  <li id="logout">
+            <a href="{url 'user/logout'}" class="header_icon" title="注销">
+                <i class="icon icon_logout"></i>
+            </a>
+        </li>
+</ul>
+
+      
+    </div>
+</header>
+
+
+<div class="main">
+    <!-- 侧边栏 -->
+        <!-- 侧边栏 -->
+
+    <aside id="aside" style="display: block;">
+
+    <i class="aside_bg"></i>   
+    
+		<div class="aside_main">
+			<a href="javascript:;" id="asideToggle" class="aside_toggle" title="收起侧边栏" data-switch="展开侧边栏"><i class="aside_arrow"></i></a>
+       
+<div id="search-menu" class="input-group" style="margin-top: 25px;margin-left: 4.5px;">
+                                <input name="q" class="form-control input-lg" type="text" placeholder=" 输入名称查找..." autocomplete="off">
+                   
+            </div>
+        {php $frames = empty($frames) ? $GLOBALS['frames'] : $frames; _calc_current_frames($frames);}
+        {if !empty($frames)}   
+                   {if $GLOBALS['ext_type'] > 0}
+                        <div class="btn-group">
+                            <button class="btn {if $GLOBALS['ext_type'] == 1}btn-primary{else}btn-default{/if} ext-type" style="margin-left: 2px;width: 65px;" data-id="1">默认</button>
+                            <button class="btn {if $GLOBALS['ext_type'] == 2}btn-primary{else}btn-default{/if} ext-type" style="width: 65px;" data-id="2">系统</button>
+                            <button class="btn {if $GLOBALS['ext_type'] == 3}btn-primary{else}btn-default{/if} ext-type" style="width: 65px;" data-id="3">复合</button>
+                        </div>
+                    {/if} 
+			{loop $frames $k $frame}
+			<div class="aside_group">
+
+				<a href="javascript:;" class="aside_nav asideRadio " data-title="{if empty($frame['title']) }未分类{else}{$frame['title']} {/if}">
+                    {if $frame['title']=='粉丝管理'}
+                                <i class="fa fa-users"></i>
+                                 {elseif $frame['title']=='会员中心'}
+                                <i class="fa fa-user"></i> 
+                                 {elseif $frame['title']=='会员卡管理'}
+                                <i class="fa fa-credit-card"></i> 
+                                 {elseif $frame['title']=='积分兑换'}
+                                <i class="fa fa-exchange"></i> 
+                                 {elseif $frame['title']=='通知中心'}
+                                <i class="fa fa-bullhorn"></i> 
+                                 {elseif $frame['title']=='微站管理'}
+                                <i class="fa fa-life-bouy"></i> 
+                                 {elseif $frame['title']=='特殊页面管理'}
+                                <i class="fa  fa-file-text-o"></i> 
+                                 {elseif $frame['title']=='功能组件'}
+                                <i class="fa fa-puzzle-piece"></i> 
+                                 {elseif $frame['title']=='基本功能'}
+                                <i class="fa fa-cog"></i> 
+                                 {elseif $frame['title']=='高级功能'}
+                                <i class="fa fa-flask"></i> 
+                                 {elseif $frame['title']=='数据统计'}
+                                <i class="fa fa-line-chart"></i> 
+                                 {elseif $frame['title']=='公众号选项'}
+                                <i class="fa fa-comments-o"></i> 
+                                 {elseif $frame['title']=='会员及粉丝选项'}
+                                <i class="fa fa-user-secret"></i> 
+                                 {elseif $frame['title']=='其他功能选项'}
+                                <i class="fa fa-cube"></i> 
+                                 {elseif $frame['title']=='管理'}
+                                <i class="fa fa-wrench"></i> 
+                                 {elseif $frame['title']=='主要业务'}
+                                <i class="fa fa-th-large"></i> 
+                                 {elseif $frame['title']=='营销及活动'}
+                                <i class="fa fa-gift"></i> 
+                                 {elseif $frame['title']=='客户关系'}
+                                <i class="fa fa-share-alt"></i> 
+                                 {elseif $frame['title']=='游戏应用'}
+                                <i class="fa fa-gamepad"></i> 
+                                {elseif $frame['title']=='其他'}
+                                <i class="fa fa-ellipsis-h"></i> 
+                                {elseif $frame['title']=='展示应用'}
+                                <i class="fa fa-desktop"></i> 
+                                {else}
+                                <i class="fa fa-th-list"></i> 
+                                {/if}
+                </a>
+
+				<dl class="aside_dl">
+					<dt class="aside_dt">
+                            {if $frame['title']=='粉丝管理'}
+                                <i class="fa fa-users"></i>
+                                 {elseif $frame['title']=='会员中心'}
+                                <i class="fa fa-user"></i> 
+                                 {elseif $frame['title']=='会员卡管理'}
+                                <i class="fa fa-credit-card"></i> 
+                                 {elseif $frame['title']=='积分兑换'}
+                                <i class="fa fa-exchange"></i> 
+                                 {elseif $frame['title']=='通知中心'}
+                                <i class="fa fa-bullhorn"></i> 
+                                 {elseif $frame['title']=='微站管理'}
+                                <i class="fa fa-life-bouy"></i> 
+                                 {elseif $frame['title']=='特殊页面管理'}
+                                <i class="fa  fa-file-text-o"></i> 
+                                 {elseif $frame['title']=='功能组件'}
+                                <i class="fa fa-puzzle-piece"></i> 
+                                 {elseif $frame['title']=='基本功能'}
+                                <i class="fa fa-cog"></i> 
+                                 {elseif $frame['title']=='高级功能'}
+                                <i class="fa fa-flask"></i> 
+                                 {elseif $frame['title']=='数据统计'}
+                                <i class="fa fa-line-chart"></i> 
+                                 {elseif $frame['title']=='公众号选项'}
+                                <i class="fa fa-comments-o"></i> 
+                                 {elseif $frame['title']=='会员及粉丝选项'}
+                                <i class="fa fa-user-secret"></i> 
+                                 {elseif $frame['title']=='其他功能选项'}
+                                <i class="fa fa-cube"></i> 
+                                 {elseif $frame['title']=='管理'}
+                                <i class="fa fa-wrench"></i> 
+                                 {elseif $frame['title']=='主要业务'}
+                                <i class="fa fa-th-large"></i> 
+                                 {elseif $frame['title']=='营销及活动'}
+                                <i class="fa fa-gift"></i> 
+                                 {elseif $frame['title']=='客户关系'}
+                                <i class="fa fa-share-alt"></i> 
+                                 {elseif $frame['title']=='游戏应用'}
+                                <i class="fa fa-gamepad"></i> 
+                                {elseif $frame['title']=='其他'}
+                                <i class="fa fa-ellipsis-h"></i> 
+                                {elseif $frame['title']=='展示应用'}
+                                <i class="fa fa-desktop"></i> 
+                                {else}
+                                <i class="fa fa-th-list"></i> 
+                                {/if}
+                                {if empty($frame['title']) }&nbsp;未分类{else}&nbsp;{$frame['title']} {/if}</dt>
+						{loop $frame['items'] $link}
+						<dd><a href="{$link['url']}" kw="{$link['title']}"  class="aside_nav  {$link['active']}" >{$link['title']}</a></dd>
+					
+                        {/loop}	
+					
+				</dl>
+			</div>
+			{/loop}
+            {/if}
+		</div>
+		
+</aside>
+<section>
+    <div class="section_main">
+    <div class="section_auto">
+				{if defined('IN_MESSAGE')}
+		
+       <style type="text/css">
+  .page_error_msg .inner {
+text-align: center;
+padding-top: 50px;
+}
+
+.icon_page_error {
+background: url("./resource/mpqq/images/page_error.png") 0 0 no-repeat;
+width: 180px;
+height: 140px;
+vertical-align: middle;
+display: inline-block;
+}  
+
+
+.page_error_msg {
+width: 500px;
+
+}
+.page_error_msg h4 {
+line-height: 30px;
+font-weight: 400;
+font-style: normal;
+font-size: 16px;
+}
+
+</style>
+<div class="page_error_msg">
+    <div class="inner">
+        <span class="icon_wrp">
+              <i class="icon_page_error">
+                                <i style="margin-top: 20px; color:#FBC15E;" class="fa fa-4x fa-{if $label=='success'}check-circle{/if}{if $label=='danger'}times-circle{/if}{if $label=='info'}info-circle{/if}{if $label=='warning'}exclamation-triangle{/if}"></i>
+                            </i>
+        </span>
+        <div class="msg_content">
+            {if is_array($msg)}
+            <h3>MYSQL 错误：</h3>
+            <h4>{php echo cutstr($msg['sql'], 300, 1);}</h4>
+            <h4><b>{$msg['error'][0]} {$msg['error'][1]}：</b>{$msg['error'][2]}</h4>
+            {else}
+            <h2>{$caption}</h2>
+            <h4>{$msg}</h4>
+            {/if}
+            {if $redirect}
+            <p><a href="{$redirect}" class="alert-link">如果你的浏览器没有自动跳转，请点击此链接</a></p>
+            <script type="text/javascript">
+                setTimeout(function () {
+                    location.href = "{$redirect}";
+                }, 3000);
+            </script>
+            {else}
+            <p>[<a href="javascript:history.go(-1);" class="alert-link">返回上一页</a>] &nbsp; [<a href="./?refresh" class="alert-link">首页</a>]</p>
+            {/if}
+        </div>
+    </div>
+</div>		
+		{else}
+        <div class="content_nav ui_wrapper"> <h2 class="section_title"></h2> </div>
+          <div class="ui_tab_contents">
+        {/if}
+	
+    	<!--左边导航-->
+
+<script src="./resource/mpqq/cuman.min.js"></script>
+<script>
+	
+$(function(){
+	
+	$("#menuBar dl").first().addClass("no_extra");
+
+	$("#menuBar dd").click(function(){
+
+		$("#menuBar dd").removeClass("selected");
+		$(this).addClass("selected");
+
+	});
+
+});
+	
+</script>
+<script type="text/javascript">
+						require(['bootstrap'], function(){
+							$('.ext-type').click(function(){
+								var id = $(this).data('id');
+								util.cookie.del('ext_type');
+								util.cookie.set('ext_type', id, 8640000);
+								location.reload();
+								return false;
+							});
+
+							$('#search-menu input').keyup(function() {
+								var a = $(this).val();
+								$('.aside_main .aside_dl .aside_nav, .aside_main .aside_dl .aside_dt,.aside_main .aside_group').hide();
+								$('.aside_main .aside_dl .aside_nav').each(function() {
+									$(this).css('border-left', '0');
+									if(a.length > 0 && $(this).attr('kw').indexOf(a) >= 0) {
+                                        $(this).parents(".aside_group").show();
+										$(this).parents(".aside_group").find('.aside_dt').show();
+										$(this).show().css('border-left', '4px #428bca outset');
+                                        $(this).show().css('margin-left', '2px');
+                                    
+									}
+								});
+								if(a.length == 0) {
+								$('.aside_main .aside_dl .aside_nav, .aside_main .aside_dl .aside_dt,.aside_main .aside_group').show();
+								}
+							});
+						});
+</script>

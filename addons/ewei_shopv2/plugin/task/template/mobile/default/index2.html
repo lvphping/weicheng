@@ -1,0 +1,315 @@
+{template '_header'}
+<style>
+    .fui-page{
+        background-color: #f3f3f3;
+    }
+    .rewarddesc{
+        color: #fe5455;
+    }
+    .task-list-media{
+        padding:0.5rem 0.5rem;
+    }
+    .task-btn-danger{
+        border-radius: 1rem;
+        padding: 0 1rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+    }
+    .task-btn-default{
+        border-radius: 1rem;
+        padding: 0 1rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+    }
+    .task-btn-success{
+        border-radius: 1rem;
+        padding: 0 1rem;
+        height: 1.5rem;
+        line-height: 1.5rem;
+    }
+    .task-modal{
+        width: 13rem;
+        position: absolute;
+        top:-28rem;
+        left:3rem;
+        background-color: #ffffff;
+        border-radius: 20px;
+    }
+    .task-btn-close{
+        position: absolute;
+        top: -0.3rem;
+        right: -0.4rem;
+        background-color: #ffffff;
+        padding: 0px 4px;
+        color: #fe9900;
+        border-radius: 1rem;
+    }
+    .task-modal-title{
+        height: 2.5rem;
+        text-align: center;
+        padding-top: 0.7rem;
+        color: #ffffff;
+        background-color: #fe9900;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+
+    }
+    .task-modal-content{
+        text-align: center;
+    }
+    .task-modal-group{
+        margin: 0 0.5rem;
+    }
+    .task-modal-list{
+        padding: 0;
+        padding-top: 0.5rem;
+        padding-bottom:0.5rem;
+        border-bottom: 1px solid #C3BFBF;
+    }
+    .task-modal-btn{
+        font-size: 0.7rem;
+        height: 1.2rem;
+        padding: 0 0.7rem;
+        line-height: 1.2rem;
+    }
+    .task-title{
+        text-align: left;
+        font-size:1px;
+    }
+    .task-modal-goods{
+
+    }
+    .task-goods-title{
+        padding-left: 0.5rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        text-align: left;
+    }
+    .task-modal-goods{
+        width: 100%;
+    }
+    .item-goods{
+        width:33%;
+        float: left;
+    }
+    .task-goods-name{
+        text-align: center;
+        color: #949090;
+    }
+    .task-goods-img{
+        border-radius: 0.5rem;
+        width: 3rem;
+        height: 3rem;
+    }
+    .empty-tip{
+        text-align:center;
+    }
+</style>
+
+<div class='fui-page'>
+
+    <div class='fui-content'>
+        <div class="fui-tab fui-tab-danger">
+            <a data-href="canget" class="tasktab active">可领取</a>
+            <a data-href="runninga" class="tasktab">正在进行</a>
+            <a data-href="complete" class="tasktab">已完成</a>
+            <a data-href="faile" class="tasktab">已失效</a>
+        </div>
+        <div class="fui-list-group fui-list-group-o" id="canget" >
+            {if !empty($task_list) }
+            {loop $task_list $value}
+            <div class="fui-list">
+                <div class="fui-list-media task-list-media">
+                    <span class="icon icon-jifen"></span>
+                </div>
+                <div class="fui-list-inner">
+                    <div class="title">{$value['title']}</div>
+                    <div class="text">奖励:<span class="rewarddesc">{$value['rewarddesc']}</span></div>
+                </div>
+                <div class="fui-list-angle">
+                    <a class="btn btn-danger task-btn-danger gettask" data-value="{$value['keyword']}">领取</a>
+                </div>
+            </div>
+            {/loop}
+            {else}
+            <div class="fui-list">
+                <div class="fui-list-inner">
+                    <div class="empty-tip">暂无任务信息..</div>
+                </div>
+            </div>
+            {/if}
+
+        </div>
+
+        <div class="fui-list-group fui-list-group-o" id="runninga" style="display: none;">
+            {if !empty($task_running) }
+            {loop $task_running $value}
+            <div class="fui-list">
+                <div class="fui-list-media task-list-media">
+                    <span class="icon icon-jifen"></span>
+                </div>
+                <div class="fui-list-inner">
+                    <div class="title">{$value['title']}</div>
+                    <div class="text">任务进度:<span class="rewarddesc">{$value['completecount']}/{$value['needcount']}</span></div>
+                </div>
+                <div class="fui-list-angle">
+                    <a class="btn btn-default disabled task-btn-default">正在进行</a>
+                </div>
+            </div>
+            {/loop}
+            {else}
+            <div class="fui-list">
+                <div class="fui-list-inner">
+                    <div class="empty-tip">暂无任务信息..</div>
+                </div>
+            </div>
+            {/if}
+        </div>
+
+        <div class="fui-list-group fui-list-group-o" id="complete" style="display: none;">
+            {if !empty($task_complete) }
+            {loop $task_complete $value}
+            <div class="fui-list">
+                <div class="fui-list-media task-list-media">
+                    <span class="icon icon-jifen"></span>
+                </div>
+                <div class="fui-list-inner">
+                    <div class="title">{$value['title']}</div>
+                    <div class="text">奖励:<span class="rewarddesc">{$value['rewarddesc']}</span></div>
+                </div>
+                <div class="fui-list-angle">
+                    <a class="btn btn-success task-btn-success taskinfo" data-credit="{$value['reward_data']['credit']}" data-money="{$value['reward_data']['money']['num']}" data-bribery="{$value['reward_data']['bribery']}" data-coupon="{$value['reward_data']['coupon']['total']}" data-goods='{php echo json_encode($value['reward_data']['goods']);}' >查看详情</a>
+                </div>
+            </div>
+            {/loop}
+            {else}
+            <div class="fui-list">
+                <div class="fui-list-inner">
+                    <div class="empty-tip">暂无任务信息..</div>
+                </div>
+            </div>
+            {/if}
+        </div>
+        <div class="fui-list-group fui-list-group-o" id="faile" style="display: none;">
+            {if !empty($faile_complete) }
+            {loop $faile_complete $value}
+            <div class="fui-list">
+                <div class="fui-list-media task-list-media">
+                    <span class="icon icon-jifen"></span>
+                </div>
+                <div class="fui-list-inner">
+                    <div class="title">{$value['title']}</div>
+                    <div class="text">奖励:<span class="rewarddesc">{$value['rewarddesc']}</span></div>
+                </div>
+                <div class="fui-list-angle">
+                    <a class="btn btn-default disabled task-btn-default">已失效</a>
+                </div>
+            </div>
+            {/loop}
+            {else}
+            <div class="fui-list">
+                <div class="fui-list-inner">
+                    <div class="empty-tip">暂无任务信息..</div>
+                </div>
+            </div>
+            {/if}
+        </div>
+    </div>
+
+    {template '_copyright'}
+</div>
+<div id="taskinfo" style="display: none">
+    <div class="task-modal">
+        <span class="icon icon-close task-btn-close"></span>
+        <div class="task-modal-title">恭喜你完成**任务</div>
+        <div class="task-modal-content">
+            <div class="task-modal-group" id="topreward">
+
+            </div>
+            <div class="task-goods-title">特价购买:</div>
+            <div class="task-modal-goods" id="bottomreward">
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var taskget = '';
+    $('.gettask').click(function () {
+        var keyword = $(this).data('value');
+        $.get("{php echo mobileUrl('task/index/gettask',array('openid'=>$openid),true);}&content="+keyword,function (data) {
+            if(data.status){
+                FoxUI.message.success('领取成功','恭喜您成功领取任务海报！快去分享给你的小伙伴吧~~',function(){
+                });
+            }else{
+                FoxUI.toast.show('海报领取失败~');
+            }
+        },'json');
+    });
+    $('.tasktab').click(function () {
+        var tabpage = $(this).data('href');
+        $('.fui-list-group').hide();
+        $('.tasktab').attr('class','tasktab');
+        $(this).attr('class','tasktab active');
+        $('#'+tabpage).show();
+    });
+    $('.taskinfo').click(function () {
+        $('#topreward').empty();
+        $('#bottomreward').empty();
+        var credit = $(this).data('credit');
+        var res ='';
+        if(credit){
+            res = '<div class="fui-list task-modal-list"><div class="fui-list-media">'+
+                    '<span class="icon icon-jifen"></span></div><div class="fui-list-inner">'+
+                    '<div class="task-title">积分:'+credit+'</div></div><div class="fui-list-angle ">'+
+                    '<a class="btn btn-warning disabled task-modal-btn">领取</a></div></div>';
+            $('#topreward').append(res);
+        }
+        var money = $(this).data('money');
+        if(money){
+            res = '<div class="fui-list task-modal-list"><div class="fui-list-media">'+
+                    '<span class="icon icon-jifen"></span></div><div class="fui-list-inner">'+
+                    '<div class="task-title">奖金:'+money+'元</div></div><div class="fui-list-angle ">'+
+                    '<a class="btn btn-warning disabled task-modal-btn">领取</a></div></div>';
+            $('#topreward').append(res);
+        }
+        var bribery = $(this).data('bribery');
+        if(bribery){
+            res = '<div class="fui-list task-modal-list"><div class="fui-list-media">'+
+                    '<span class="icon icon-jifen"></span></div><div class="fui-list-inner">'+
+                    '<div class="task-title">红包:'+bribery+'元</div></div><div class="fui-list-angle ">'+
+                    '<a class="btn btn-warning disabled task-modal-btn">领取</a></div></div>';
+            $('#topreward').append(res);
+        }
+        var coupon = $(this).data('coupon');
+        if(coupon){
+            res = '<div class="fui-list task-modal-list"><div class="fui-list-media">'+
+                    '<span class="icon icon-jifen"></span></div><div class="fui-list-inner">'+
+                    '<div class="task-title">优惠卷:'+coupon+'张</div></div><div class="fui-list-angle ">'+
+                    '<a class="btn btn-warning disabled task-modal-btn">领取</a></div></div>';
+            $('#topreward').append(res);
+        }
+        var goods = $(this).data('goods');
+        if(goods){
+            res = '';
+            $.each(goods,function(key,val){
+                res += '<div class="item-goods"><img src="'+val['thumb']+'" class="task-goods-img">'+
+                        '<p class="task-goods-name">'+val['title']+'</p></div>';
+            });
+            $('#bottomreward').append(res);
+        }
+        taskget = new FoxUIModal({
+            content: $('#taskinfo').html(),
+            extraClass: 'picker-modal',
+            maskClick: function () {
+                taskget.close()
+            }
+        });
+        taskget.container.find('.task-btn-close').click(function () {
+            taskget.close()
+        });
+        taskget.show();
+    });
+</script>
+
+{template '_footer'}

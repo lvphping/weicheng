@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.goupu.org" versionCode="0.6">
+	<application setting="false">
+		<name><![CDATA[粉丝榜]]></name>
+		<identifie><![CDATA[bm_top]]></identifie>
+		<version><![CDATA[1.0]]></version>
+		<type><![CDATA[business]]></type>
+		<ability><![CDATA[粉丝榜]]></ability>
+		<description><![CDATA[粉丝榜]]></description>
+		<author><![CDATA[狗扑资源社区]]></author>
+		<url><![CDATA[www.goupu.org]]></url>
+	</application>
+	<platform>
+		<subscribes>
+			<message type="subscribe" />
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<menu>
+		</menu>
+	</bindings>
+	<install><![CDATA[
+		CREATE TABLE IF NOT EXISTS `ims_bm_top_reply` (
+		  `id` int(11) NOT NULL AUTO_INCREMENT,
+		  `rid` int(10) unsigned NOT NULL DEFAULT '0',
+		  `weid` int(11) NOT NULL,
+		  `n` int(10) NOT NULL DEFAULT '0',
+		  `desc` varchar(500) NOT NULL,
+		  `pictype` int(1) NOT NULL DEFAULT '0',
+		  `picurl` varchar(100),
+		  `urlx` varchar(100),
+		  `title` varchar(100),
+		  PRIMARY KEY (`id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;		
+	]]></install>
+	<uninstall><![CDATA[
+		DROP TABLE IF EXISTS `ims_bm_top_reply`;
+	]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

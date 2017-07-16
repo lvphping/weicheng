@@ -1,0 +1,67 @@
+<script language="JavaScript" type="text/javascript" src="{$shouquanurl}"></script>
+<script language='javascript' src='../addons/bm_attraction/template/js/tooltipbox.js'></script>
+<style type='text/css'>
+.red { float:left;color:red}
+.white {float:left;color:white}
+.tooltipbox {
+	background:#fef8dd;border:1px solid #c40808; position:absolute; left:0;top:0; text-align:center;height:20px;
+	color:#c40808;padding:2px 5px 1px 5px; border-radius:3px;z-index:1000;
+}
+</style>
+<input name="we7_ValidCode_server" type="hidden" id="we7_ValidCode_server" >  
+<input name="shouquanurl" type="hidden" value="{$shouquanurl}" >
+<input name="shouquan" type="hidden" value="{$shouquan}" >
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="panel panel-default">
+    <div class="panel-heading">
+        回复设置
+    </div>
+    <div class="panel-body">
+		<div class="form-group">
+			<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 回复方式</label>
+			<div class="col-sm-9 col-xs-12">
+				<label class='radio-inline'>
+					<input type='radio' value='0' name='pictype' {if $reply['pictype']=='0'}checked{/if}>图文
+				</label> 
+				<label class='radio-inline'>
+					<input type='radio' value='1' name='pictype' {if $reply['pictype']=='1'}checked{/if}>文本
+				</label>
+			</div>
+		</div>	
+		<div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 关键字回复封面</label>
+            <div class="col-sm-9 col-xs-12">
+               	{php echo tpl_form_field_image('picurl',$reply['picurl']);}
+				<span class="help-block">仅在图文方式中有效！</span>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 跳转URL</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" id="urlx" class="form-control" placeholder="" name="urlx" value="{$reply['urlx']}">
+				<span class="help-block">点击链接后跳转的网址，仅在图文方式中有效！</span>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 初始会员数</label>
+            <div class="col-sm-9 col-xs-12">
+               	<input type="text" id="n" class="form-control" placeholder="" name="n" value="{$reply['n']}">
+				<span class="help-block">虚拟会员数</span>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 关键字回复标题</label>
+            <div class="col-sm-9 col-xs-12">
+				<textarea style="height:200px; width:80%;" class="span7 richtext-clone" name="title" cols="70" id="reply-add-text">{$reply['title']}</textarea>
+				<span class="help-block"></span>
+            </div>
+        </div>
+		<div class="form-group">
+            <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span> 关键字回复内容</label>
+            <div class="col-sm-9 col-xs-12">
+				<textarea style="height:200px; width:80%;" class="span7 richtext-clone" name="desc" cols="70" id="reply-add-text">{$reply['desc']}</textarea>
+				<span class="help-block">可用参数：{name}为公众号名称，{numx}为虚拟会员号</span>
+            </div>
+        </div>
+	</div>
+</div>

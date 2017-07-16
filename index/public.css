@@ -1,0 +1,30 @@
+/* CSS Document */
+
+fieldset, img {border:0}
+a {cursor:pointer;text-decoration: none;}
+a:hover {color: #000;}
+:focus {outline:0}
+
+
+input, button{font-family:inherit;font-size:inherit;font-style:inherit;font-weight:inherit}
+ol, ul, li {list-style:none}
+table {text-align:left;font-family:Arial, Helvetica, sans-serif}
+:link, :visited, ins {text-decoration:none}
+blockquote, q {quotes:none}
+blockquote:before, blockquote:after, q:before, q:after {content:none}
+input, img, select, button {vertical-align:middle;}
+h1, h2, h3, h4, h5, h6 {font-size:14px;font-weight:normal;}
+code, kbd, samp, tt, input, button, textarea, select {font-size:100%}
+.clearfix {display: inline-block;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+.clearfix:after {content: ".";clear: both;height: 0;visibility: hidden;display: block;}
+.clearfix .li2 {color:red}
+.clear {clear:both;}
+
+.g-box{display:box; display:-moz-box; display:-o-box; display:-webkit-box;}
+.g-flex{-moz-box-flex:1;-webkit-box-flex:1; box-flex:1;}
+
+body {font-size:12px;position:relative;-webkit-tap-highlight-color: rgba(0,0,0,0);}
+/*微橙微信商城系统*/
+

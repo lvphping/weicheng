@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+        <meta name="format-detection" content="telephone=no" />
+        <title>{if empty($this->merch_user)}{$_W['shopset']['shop']['name']}{else}{php echo $this->merch_user['merchname']}{/if}</title>
+        <link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/template/mobile/color/static/css/foxui.min.css?v=0.1">
+        <link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/template/mobile/color/static/css/style.css?v=2.0.0">
+        {if is_h5app()}
+        <link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/template/mobile/color/static/css/h5app.css?v=2.0.0">
+        {/if}
+		
+		
+		<link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/template/mobile/color/css/font/iconfont.css">
+        <link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/template/mobile/color/css/style.css">
+		<link rel="stylesheet" type="text/css" href="../addons/ewei_shopv2/template/mobile/color/css/static/css/style.css">
+		
+		
+		
+		
+
+        <link rel="stylesheet" type="text/css" href="{php echo EWEI_SHOPV2_LOCAL}static/fonts/iconfont2.css?v=23864744">
+<script src="./resource/js/lib/jquery-1.11.1.min.js"></script>
+       <script src='//res.wx.qq.com/open/js/jweixin-1.1.0.js'></script>
+<!--   <script src="../addons/ewei_shopv2/static/js/dist/foxui/js/foxui.min.js"></script>-->
+        <script src="{php echo EWEI_SHOPV2_LOCAL}static/js/require.js"></script>
+        <script src="{php echo EWEI_SHOPV2_LOCAL}static/js/myconfig-app.js"></script>
+        <script language="javascript">require(['core'],function(modal){modal.init({siteUrl: "{$_W['siteroot']}",baseUrl: "{php echo mobileUrl('ROUTES')}"})});</script>
+
+        {if !is_mobile() && !is_weixin() && !is_h5app()}
+        <style type="text/css">
+            body {
+                position: absolute;;
+                max-width: 750px;  margin:auto;
+            }
+            .fui-navbar {
+                max-width:750px;clear:both;
+            }
+            .fui-navbar,.fui-footer  {
+                max-width:750px;
+            }
+            .fui-page.fui-page-from-center-to-left,
+            .fui-page-group.fui-page-from-center-to-left,
+            .fui-page.fui-page-from-center-to-right,
+            .fui-page-group.fui-page-from-center-to-right,
+            .fui-page.fui-page-from-right-to-center,
+            .fui-page-group.fui-page-from-right-to-center,
+            .fui-page.fui-page-from-left-to-center,
+            .fui-page-group.fui-page-from-left-to-center {
+                -webkit-animation: pageFromCenterToRight 0ms forwards;
+                animation: pageFromCenterToRight 0ms forwards;
+            }
+        </style>
+        {/if}
+		
+		
+		
+		
+		
+		
+		<style type="text/css">
+ul,li {padding:0; margin:0;}
+a{ text-decoration:none;}
+i.i20{ width:22px; height:22px; font-size:24px; margin-bottom:2px; color:#575757;}
+i.i22{ width:22px; height:22px; border-radius:3px; margin-right:6px; color:#fff; line-height:22px;}
+.icon-mark{font-size:22px; left:-2px}
+.icon-shezhi {font-size:22px; }
+.icon-right{ color:#c7c7cc}
+.icon-form{background-color:#ffba64;}
+.icon-licaishouyi{background-color:#ff6666;}
+.icon-collect{background-color:#ff7daf;}
+
+.icon-footprint{background-color:#adee72;}
+
+.icon-question{background-color:#71c1ff;}
+.icon-notice{background-color:#ffa366;}
+.icon-present{background-color:#F00;}
+.icon-redpacket{background-color:#ff4965;}
+.icon-fuwuchuanga{background-color:#ffa366;}
+.icon-scan{background-color:#ff4965;}
+.icon-vip{background-color:#ff4965;}
+
+.icon-male{background-color:#ffa366;}
+
+.icon-similar{background-color:#71c1ff;}
+
+.icon-vipcard{background-color:#ffa366;}
+
+.user{width:100%; height:95px; background:#fd7c59; padding:50px 3% 0 5%;}
+.user .user_face{width:70px; height:70px; overflow:hidden; border-radius:50px; margin:0 auto; background-color:#fff; margin-right:10px;}
+.user .user_face img {width:100%; height:100%;}
+.user .user_info{color:#fff;}
+.user .user_name{ max-width:120px; height:18px; line-height:18px; overflow:hidden;font-size:16px; margin-top:20px; margin-bottom:6px; float:left;color:#fff;}
+.user .user_level{width:60px; height:16px; overflow:hidden; background:url(../addons/ewei_shop/template/mobile/inzens/new/images/icons.svg) no-repeat -200px -182px; font-size:12px; line-height:16px; padding-left:20px; color:#fd7c59; display:inline-block; position:relative; top:21px; margin-left:8px;}
+.user_infos{ width:150px; font-size:12px; height:18px; overflow:hidden;color:#fff;}
+
+.user_bar{width:100%; padding:12px 4% 0 4%; position: absolute;}
+.user_bar .top_nav{width:20px; height:20px;color:#fff;}
+
+.user_warp{width:100%;padding:0 3% 0 5%; background:#fff;}
+.user_warp .user_tit{width:100%; height:43px; line-height:43px; border-bottom:1px solid #e4e4e4; overflow:hidden;}
+.user_warp .user_tit1{width:100%; height:43px; line-height:43px; overflow:hidden;}
+.user_warp .user_tit1 a{font-size:16px;color:#333;}
+.user_warp .user_tit a{ width:100%; height:100%; display:block; color:#333;font-size:16px;}
+.user_warp .user_titr{font-size:12px; line-height:43px; color:#f00;}
+
+.order_list{ width:100%;padding:0 3% 0 3%; background:#fff; border-bottom:1px solid #e4e4e4;}
+.order_list ul li{float:left; list-style:none; margin:0;text-align: center; padding:10px 0;box-sizing:border-box; width:25%; height:60px;flex: 1;display: list-item;}
+.order_list ul li a{ color:#666; font-size:13px; display:inline-block; position:relative;}
+.order_list ul li span{position:absolute;right:-5px; top:0;text-align:center;background-color:#fd7c59;width:14px;height:14px;border-radius:20px;font-size:12px;line-height:14px;color: #fff;overflow: hidden; display:inline-block; font-style:normal;}
+.order_list ul li p{ color:#676767;display: block;-webkit-margin-before: 4px;-webkit-margin-after: 4px;-webkit-margin-start: 0px;-webkit-margin-end: 0px;}
+
+.money_list{width:100%;padding:0 3% 0 5%; background:#fff;}
+.money_list ul{width:100%;border-bottom:1px solid #e4e4e4; overflow:hidden;}
+.money_list ul li{float:left; list-style:none; margin:0;box-sizing:border-box; width:42%; height:50px; line-height:50px; padding-left:3%;}
+.money_list ul li.money_cz{width:12%; padding-left:0;}
+.money_list ul li.money_cz a{ width:36px; height:20px; display:block; background:#fd7c59; color:fff; line-height:20px;border-radius:3px; margin-top:15px; text-align:center;}
+#btnwithdraw{ color:#fff;}
+.money_list ul li a{ color:#666; font-size:13px; display: inline-block; width:100%;position: relative;}
+.money_list ul li .txt{ margin-left:3px;}
+.money_list ul li .num{ color:#fd7c59; margin-left:2px;}
+
+
+</style>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    </head>
+
+    <body ontouchstart>
+		<div class='fui-page-group'>
